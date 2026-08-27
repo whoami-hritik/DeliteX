@@ -151,3 +151,5 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
     </>
   );
 }
+
+export type { Section };
