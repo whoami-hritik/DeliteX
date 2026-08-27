@@ -51,11 +51,11 @@ function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string, onDisc
     <div className="relative z-50">
       <button 
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-gray-200 px-4 py-2 rounded-full hover:bg-white/80 hover:shadow-sm transition-all text-sm font-semibold text-gray-800"
+        className="flex items-center gap-2 bg-[var(--color-bg-card)] backdrop-blur-xl border border-[var(--color-border)] px-4 py-2 rounded-full hover:bg-white/10 hover:shadow-sm transition-all text-sm font-semibold text-[var(--color-ink-900)]"
       >
-        <Wallet size={16} className="text-indigo-600" />
+        <Wallet size={16} className="text-[var(--color-ink-500)]" />
         {shortKey}
-        <ChevronDown size={14} className={`text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
+        <ChevronDown size={14} className={`text-[var(--color-ink-500)] transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
       <AnimatePresence>
@@ -65,16 +65,16 @@ function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string, onDisc
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full right-0 mt-2 bg-white border border-gray-100 rounded-2xl p-2 w-52 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col gap-1"
+            className="absolute top-full right-0 mt-2 bg-[#1A1A1A] border border-white/10 rounded-2xl p-2 w-52 shadow-[0_8px_30px_rgb(0,0,0,0.5)] flex flex-col gap-1"
           >
             <a 
               href={`https://stellar.expert/explorer/testnet/account/${publicKey}`} 
               target="_blank" 
               rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"
             >
-              <ExternalLink size={16} className="text-gray-400" />
+              <ExternalLink size={16} className="text-white/50" />
               View on Explorer
             </a>
             <button 
@@ -82,7 +82,7 @@ function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string, onDisc
                 setOpen(false);
                 onDisconnect();
               }}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors text-left w-full"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-[var(--color-saffron)] hover:bg-[var(--color-saffron)]/10 transition-colors text-left w-full"
             >
               <LogOut size={16} />
               Disconnect Wallet
@@ -140,8 +140,8 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
       return (
         <div className="flex items-center justify-center py-20">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-            <p className="text-gray-500 font-medium">Loading testnet data...</p>
+            <div className="w-8 h-8 border-4 border-white/20 border-t-white/80 rounded-full animate-spin" />
+            <p className="text-[var(--color-ink-500)] font-medium">Loading testnet data...</p>
           </div>
         </div>
       );
@@ -152,23 +152,23 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-md mx-auto mt-20 p-10 bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center flex flex-col items-center gap-6"
+          className="max-w-md mx-auto mt-20 p-10 bg-[var(--color-bg-card)] backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-[0_8px_32px_rgba(0,0,0,0.4)] text-center flex flex-col items-center gap-6"
         >
-          <div className="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-500">
-            <Wallet size={40} />
+          <div className="text-[3rem]">
+            💳
           </div>
           <div>
-            <h2 className="font-display text-3xl text-gray-900 font-bold mb-3 tracking-tight">
+            <h2 className="font-display text-3xl text-[var(--color-ink-900)] font-bold mb-3 tracking-tight">
               Connect your Wallet
             </h2>
-            <p className="text-gray-500 leading-relaxed text-sm">
+            <p className="text-[var(--color-ink-500)] leading-relaxed text-sm">
               You need a Stellar Testnet wallet to use the dashboard. Connect with Freighter, xBull, or Albedo, and we&apos;ll automatically fund it with 10,000 XLM via Friendbot.
             </p>
           </div>
           <button 
             onClick={handleConnectWallet}
             disabled={funding}
-            className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all shadow-[0_4px_14px_rgba(0,0,0,0.15)] disabled:opacity-70 flex items-center justify-center gap-2"
+            className="w-full btn btn-primary flex items-center justify-center gap-2"
           >
             {funding ? (
               <>
@@ -197,7 +197,7 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-gray-50/30 selection:bg-indigo-100 selection:text-indigo-900 text-gray-900 font-body">
+    <div className="dashboard-theme min-h-screen flex flex-col relative font-body">
       <ProceduralGroundBackground />
       <AgentNotification />
       <DemoBar />
@@ -209,14 +209,14 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
           pendingDecisions={pendingDecisions}
         />
 
-        <main className="flex-1 min-w-0 p-6 md:p-10 pb-32 max-w-7xl mx-auto w-full">
+        <main className="flex-1 min-w-0 p-6 md:p-10 pb-32 max-w-[1400px]">
           {/* Page header */}
           <div className="flex justify-between items-start mb-10">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-              <p className="text-xs font-semibold tracking-wider uppercase text-gray-400 mb-2">
+              <p className="text-xs font-semibold tracking-wider uppercase text-[var(--color-ink-300)] mb-2">
                 {new Date().toLocaleDateString("en-US", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
               </p>
-              <h1 className="font-display text-4xl font-bold tracking-tight text-gray-900">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-[var(--color-ink-900)]">
                 {SECTION_TITLES[activeSection]}
               </h1>
             </motion.div>
