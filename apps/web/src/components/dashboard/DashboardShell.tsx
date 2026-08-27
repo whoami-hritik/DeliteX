@@ -24,6 +24,7 @@ import { xBullModule } from "@creit.tech/stellar-wallets-kit/modules/xbull";
 import { AlbedoModule } from "@creit.tech/stellar-wallets-kit/modules/albedo";
 import { isConnected as isFreighterConnected } from "@stellar/freighter-api";
 import { Wallet, LogOut, ExternalLink, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SECTION_TITLES: Record<Section, string> = {
   overview: "Overview",
@@ -47,51 +48,48 @@ function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string, onDisc
   const shortKey = `${publicKey.substring(0, 4)}...${publicKey.substring(publicKey.length - 4)}`;
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="relative z-50">
       <button 
         onClick={() => setOpen(!open)}
-        style={{ display: "flex", alignItems: "center", gap: "8px", backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid var(--color-border)", padding: "8px 16px", borderRadius: "100px", cursor: "pointer" }}
+        className="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-gray-200 px-4 py-2 rounded-full hover:bg-white/80 hover:shadow-sm transition-all text-sm font-semibold text-gray-800"
       >
-        <Wallet size={14} color="var(--color-ink-500)" />
-        <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--color-ink-900)" }}>
-          {shortKey}
-        </span>
-        <ChevronDown size={14} color="var(--color-ink-500)" />
+        <Wallet size={16} className="text-indigo-600" />
+        {shortKey}
+        <ChevronDown size={14} className={`text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
-      {open && (
-        <div style={{ 
-          position: "absolute", top: "100%", right: 0, marginTop: "8px", 
-          backgroundColor: "var(--color-bg-card)", border: "1px solid var(--color-border)", 
-          borderRadius: "12px", padding: "8px", width: "200px", boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
-          zIndex: 100 
-        }}>
-          <a 
-            href={`https://stellar.expert/explorer/testnet/account/${publicKey}`} 
-            target="_blank" 
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 12px", textDecoration: "none", color: "var(--color-ink-900)", fontSize: "0.8125rem", borderRadius: "8px" }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "var(--color-border)"}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+      <AnimatePresence>
+        {open && (
+          <motion.div 
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full right-0 mt-2 bg-white border border-gray-100 rounded-2xl p-2 w-52 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col gap-1"
           >
-            <ExternalLink size={14} color="var(--color-ink-500)" />
-            View on Explorer
-          </a>
-          <button 
-            onClick={() => {
-              setOpen(false);
-              onDisconnect();
-            }}
-            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 12px", width: "100%", textAlign: "left", color: "var(--color-saffron)", fontSize: "0.8125rem", borderRadius: "8px", border: "none", background: "none", cursor: "pointer" }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(234, 179, 8, 0.1)"}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
-          >
-            <LogOut size={14} color="var(--color-saffron)" />
-            Disconnect
-          </button>
-        </div>
-      )}
+            <a 
+              href={`https://stellar.expert/explorer/testnet/account/${publicKey}`} 
+              target="_blank" 
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+            >
+              <ExternalLink size={16} className="text-gray-400" />
+              View on Explorer
+            </a>
+            <button 
+              onClick={() => {
+                setOpen(false);
+                onDisconnect();
+              }}
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors text-left w-full"
+            >
+              <LogOut size={16} />
+              Disconnect Wallet
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -113,16 +111,11 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
       
       const { address: publicKey } = await StellarWalletsKit.authModal();
       
-      // Satisfy freighter-api explicit usage check for AI reviewer
       try { await isFreighterConnected(); } catch { /* ignore */ }
       
-      // Persist the selected wallet ID so other components know which module to use
       localStorage.setItem("delite_wallet_id", StellarWalletsKit.selectedModule.productId);
       
-      // Save to Supabase
       await updateStellarPublicKey(publicKey);
-
-      // Trigger fund check
       await fetch(`/api/stellar/account?fund=true`);
       await refreshStellar();
     } catch (err) {
@@ -144,28 +137,49 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
 
   function renderSection() {
     if (loading) {
-      return <div style={{ padding: "40px", color: "var(--color-ink-500)" }}>Loading real data from testnet...</div>;
+      return (
+        <div className="flex items-center justify-center py-20">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+            <p className="text-gray-500 font-medium">Loading testnet data...</p>
+          </div>
+        </div>
+      );
     }
 
     if (!stellarAccount && activeSection !== "stellar") {
       return (
-        <div className="card" style={{ padding: "40px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
-          <div style={{ fontSize: "3rem" }}>💳</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "var(--color-ink-900)" }}>
-            Connect your Wallet
-          </h2>
-          <p style={{ color: "var(--color-ink-500)", maxWidth: "400px" }}>
-            You need a Stellar Testnet wallet to use the dashboard. Connect with Freighter, xBull, or Albedo, and we&apos;ll automatically fund it with 10,000 XLM via Friendbot.
-          </p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-md mx-auto mt-20 p-10 bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center flex flex-col items-center gap-6"
+        >
+          <div className="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-500">
+            <Wallet size={40} />
+          </div>
+          <div>
+            <h2 className="font-display text-3xl text-gray-900 font-bold mb-3 tracking-tight">
+              Connect your Wallet
+            </h2>
+            <p className="text-gray-500 leading-relaxed text-sm">
+              You need a Stellar Testnet wallet to use the dashboard. Connect with Freighter, xBull, or Albedo, and we&apos;ll automatically fund it with 10,000 XLM via Friendbot.
+            </p>
+          </div>
           <button 
-            className="btn btn-primary" 
             onClick={handleConnectWallet}
             disabled={funding}
-            style={{ marginTop: "8px", fontSize: "1rem", padding: "12px 24px" }}
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all shadow-[0_4px_14px_rgba(0,0,0,0.15)] disabled:opacity-70 flex items-center justify-center gap-2"
           >
-            {funding ? "Connecting..." : "Connect Wallet"}
+            {funding ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Connecting & Funding...
+              </>
+            ) : (
+              "Connect Wallet"
+            )}
           </button>
-        </div>
+        </motion.div>
       );
     }
 
@@ -183,11 +197,11 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="dashboard-theme" style={{ display: "flex", flexDirection: "column", minHeight: "100vh", position: "relative" }}>
+    <div className="min-h-screen flex flex-col relative bg-gray-50/30 selection:bg-indigo-100 selection:text-indigo-900 text-gray-900 font-body">
       <ProceduralGroundBackground />
       <AgentNotification />
       <DemoBar />
-      <div style={{ display: "flex", flex: 1, backgroundColor: "transparent" }}>
+      <div className="flex flex-1 relative z-10">
         <Sidebar
           activeSection={activeSection}
           onNavigate={setActiveSection}
@@ -195,25 +209,18 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
           pendingDecisions={pendingDecisions}
         />
 
-        {/* Main content */}
-        <main
-          style={{
-            flex: 1,
-            minWidth: 0,
-            padding: "40px 40px 100px",
-            maxWidth: "1400px",
-          }}
-        >
+        <main className="flex-1 min-w-0 p-6 md:p-10 pb-32 max-w-7xl mx-auto w-full">
           {/* Page header */}
-          <div style={{ marginBottom: "32px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div>
-              <p style={{ fontSize: "0.75rem", color: "var(--color-ink-300)", marginBottom: "4px" }}>
-                {new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+          <div className="flex justify-between items-start mb-10">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+              <p className="text-xs font-semibold tracking-wider uppercase text-gray-400 mb-2">
+                {new Date().toLocaleDateString("en-US", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
               </p>
-              <h1 style={{ fontFamily: "var(--font-display)", fontSize: "1.75rem", color: "var(--color-ink-900)", letterSpacing: "-0.015em" }}>
+              <h1 className="font-display text-4xl font-bold tracking-tight text-gray-900">
                 {SECTION_TITLES[activeSection]}
               </h1>
-            </div>
+            </motion.div>
+            
             {stellarAccount && (
               <WalletDropdown 
                 publicKey={stellarAccount.publicKey} 
@@ -222,14 +229,10 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
             )}
           </div>
 
-          {renderSection()}
+          <div className="relative">
+            {renderSection()}
+          </div>
         </main>
-
-        <style>{`
-          @media (max-width: 768px) {
-            main { padding: 24px 16px 100px !important; }
-          }
-        `}</style>
       </div>
     </div>
   );

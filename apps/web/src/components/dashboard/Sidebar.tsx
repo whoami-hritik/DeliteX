@@ -4,57 +4,32 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { 
+  LayoutDashboard, 
+  WalletCards, 
+  Receipt, 
+  Users, 
+  PiggyBank, 
+  GitBranch, 
+  Bot, 
+  Orbit, 
+  Settings 
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 type Section = "overview" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
-  {
-    id: "overview",
-    label: "Overview",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
-  },
-  {
-    id: "income",
-    label: "Income",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>,
-  },
-  {
-    id: "bills",
-    label: "Bills",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>,
-  },
-  {
-    id: "family",
-    label: "Family",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-  },
-  {
-    id: "savings",
-    label: "Savings",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
-  },
-  {
-    id: "rules",
-    label: "Rules",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="11" y2="18"/><circle cx="18" cy="12" r="3"/><circle cx="15" cy="18" r="3"/></svg>,
-  },
-  {
-    id: "agent",
-    label: "AI Agent",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>,
-  },
-  {
-    id: "stellar",
-    label: "Stellar 🧪",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  },
-  {
-    id: "profile",
-    label: "Settings",
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
-  }
+  { id: "overview", label: "Overview", icon: <LayoutDashboard size={18} /> },
+  { id: "income", label: "Income", icon: <WalletCards size={18} /> },
+  { id: "bills", label: "Bills", icon: <Receipt size={18} /> },
+  { id: "family", label: "Family", icon: <Users size={18} /> },
+  { id: "savings", label: "Savings", icon: <PiggyBank size={18} /> },
+  { id: "rules", label: "Rules", icon: <GitBranch size={18} /> },
+  { id: "agent", label: "AI Agent", icon: <Bot size={18} /> },
+  { id: "stellar", label: "Stellar 🧪", icon: <Orbit size={18} /> },
+  { id: "profile", label: "Settings", icon: <Settings size={18} /> },
 ];
-
 
 interface SidebarProps {
   activeSection: Section;
@@ -80,32 +55,17 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside
-        className="app-sidebar"
-        style={{
-          width: "220px",
-          minHeight: "100vh",
-          backgroundColor: "var(--color-bg-card)",
-          borderRight: "1px solid var(--color-border)",
-          display: "flex",
-          flexDirection: "column",
-          flexShrink: 0,
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          overflowY: "auto",
-        }}
-      >
+      <aside className="hidden md:flex flex-col w-[240px] h-screen sticky top-0 bg-white border-r border-gray-100 flex-shrink-0 overflow-y-auto">
         {/* Wordmark */}
-        <div style={{ padding: "24px 20px 20px", borderBottom: "1px solid var(--color-border)" }}>
-          <Link href="/" style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", letterSpacing: "-0.02em", color: "var(--color-ink-900)" }}>
-            Delite<span style={{ color: "var(--color-saffron)" }}>X</span>
+        <div className="p-6 border-b border-gray-100">
+          <Link href="/" className="font-display text-2xl font-bold tracking-tight text-gray-900">
+            Delite<span className="text-indigo-600">X</span>
           </Link>
         </div>
 
         {/* Nav */}
-        <nav style={{ flex: 1, padding: "16px 10px" }}>
-          <p style={{ fontSize: "0.6875rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--color-ink-300)", padding: "0 10px", marginBottom: "8px" }}>
+        <nav className="flex-1 p-4 space-y-1">
+          <p className="px-3 text-xs font-bold tracking-wider text-gray-400 uppercase mb-4 mt-2">
             Navigation
           </p>
           {navItems.map((item) => {
@@ -114,29 +74,32 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "9px 10px",
-                  borderRadius: "8px",
-                  border: "none",
-                  cursor: "pointer",
-                  backgroundColor: active ? "var(--color-saffron-light)" : "transparent",
-                  color: active ? "var(--color-saffron)" : "var(--color-ink-500)",
-                  fontFamily: "var(--font-body)",
-                  fontSize: "0.875rem",
-                  fontWeight: active ? 600 : 400,
-                  textAlign: "left",
-                  transition: "background 0.12s, color 0.12s",
-                  marginBottom: "2px",
-                }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative group
+                  ${active 
+                    ? "text-indigo-700" 
+                    : "text-gray-500 hover:text-gray-900"
+                  }`}
               >
-                {item.icon}
-                <span style={{ flex: 1 }}>{item.label}</span>
+                {active && (
+                  <motion.div 
+                    layoutId="active-nav" 
+                    className="absolute inset-0 bg-indigo-50/80 rounded-xl border border-indigo-100/50 -z-10"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                
+                {/* Fallback hover background for non-active items */}
+                {!active && (
+                  <div className="absolute inset-0 bg-gray-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+                )}
+                
+                <span className={`${active ? "text-indigo-600" : "text-gray-400 group-hover:text-gray-600"} transition-colors relative z-10`}>
+                  {item.icon}
+                </span>
+                <span className="flex-1 text-left relative z-10">{item.label}</span>
+                
                 {item.id === "agent" && pendingDecisions > 0 && (
-                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--color-saffron)", flexShrink: 0 }} />
+                  <span className="w-2 h-2 rounded-full bg-indigo-600 flex-shrink-0 shadow-sm shadow-indigo-200 relative z-10" />
                 )}
               </button>
             );
@@ -144,44 +107,19 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
         </nav>
 
         {/* User + sign out */}
-        <div style={{ padding: "16px", borderTop: "1px solid var(--color-border)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-            <div
-              style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "50%",
-                backgroundColor: "var(--color-jade-light)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                color: "var(--color-jade)",
-                flexShrink: 0,
-              }}
-            >
+        <div className="p-4 border-t border-gray-100 bg-gray-50/50">
+          <div className="flex items-center gap-3 mb-4 px-2">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center text-sm font-bold text-indigo-700 flex-shrink-0 shadow-sm border border-indigo-50">
               {initials}
             </div>
-            <p style={{ fontSize: "0.8125rem", color: "var(--color-ink-700)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <p className="text-sm font-medium text-gray-700 overflow-hidden text-ellipsis whitespace-nowrap">
               {userEmail}
             </p>
           </div>
           <button
             onClick={handleSignOut}
             disabled={signingOut}
-            style={{
-              width: "100%",
-              padding: "8px 12px",
-              border: "1px solid var(--color-border)",
-              borderRadius: "6px",
-              backgroundColor: "transparent",
-              color: "var(--color-ink-500)",
-              fontFamily: "var(--font-body)",
-              fontSize: "0.8125rem",
-              cursor: "pointer",
-              transition: "border-color 0.15s",
-            }}
+            className="w-full py-2.5 px-4 rounded-xl border border-gray-200 bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm disabled:opacity-50"
           >
             {signingOut ? "Signing out…" : "Sign out"}
           </button>
@@ -189,57 +127,27 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
       </aside>
 
       {/* Mobile bottom tab bar */}
-      <nav
-        className="app-bottom-nav"
-        style={{
-          display: "none",
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 40,
-          backgroundColor: "#fff",
-          borderTop: "1px solid var(--color-border)",
-          padding: "8px 0 env(safe-area-inset-bottom, 8px)",
-        }}
-      >
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 pb-safe flex px-2 pt-2 shadow-[0_-4px_24px_rgba(0,0,0,0.04)]">
         {navItems.slice(0, 5).map((item) => {
           const active = activeSection === item.id;
           return (
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "4px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                color: active ? "var(--color-saffron)" : "var(--color-ink-300)",
-                fontSize: "0.625rem",
-                fontFamily: "var(--font-body)",
-                fontWeight: active ? 600 : 400,
-                padding: "4px 0",
-              }}
+              className={`flex-1 flex flex-col items-center gap-1.5 p-2 transition-colors
+                ${active ? "text-indigo-600" : "text-gray-400"}
+              `}
             >
-              {item.icon}
-              {item.label}
+              <div className={`p-1.5 rounded-lg transition-colors ${active ? "bg-indigo-50" : "transparent"}`}>
+                {item.icon}
+              </div>
+              <span className={`text-[10px] font-medium ${active ? "font-semibold" : ""}`}>
+                {item.label}
+              </span>
             </button>
           );
         })}
       </nav>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .app-sidebar { display: none !important; }
-          .app-bottom-nav { display: flex !important; }
-        }
-      `}</style>
     </>
   );
 }
-
-export type { Section };
