@@ -23,7 +23,7 @@ import { FreighterModule } from "@creit.tech/stellar-wallets-kit/modules/freight
 import { xBullModule } from "@creit.tech/stellar-wallets-kit/modules/xbull";
 import { AlbedoModule } from "@creit.tech/stellar-wallets-kit/modules/albedo";
 import { isConnected as isFreighterConnected } from "@stellar/freighter-api";
-import { Wallet, LogOut, ExternalLink, ChevronDown } from "lucide-react";
+import { Wallet, LogOut, ExternalLink, ChevronDown, Sparkles } from "lucide-react";
 
 const SECTION_TITLES: Record<Section, string> = {
   overview: "Overview",
@@ -41,54 +41,129 @@ interface DashboardShellProps {
   userEmail: string;
 }
 
-function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string, onDisconnect: () => void }) {
+function WalletDropdown({ publicKey, onDisconnect }: { publicKey: string; onDisconnect: () => void }) {
   const [open, setOpen] = useState(false);
-  
+
   const shortKey = `${publicKey.substring(0, 4)}...${publicKey.substring(publicKey.length - 4)}`;
 
   return (
     <div style={{ position: "relative" }}>
-      <button 
+      <button
         onClick={() => setOpen(!open)}
-        style={{ display: "flex", alignItems: "center", gap: "8px", backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid var(--color-border)", padding: "8px 16px", borderRadius: "100px", cursor: "pointer" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          border: "1px solid var(--color-border)",
+          padding: "8px 16px",
+          borderRadius: "100px",
+          cursor: "pointer",
+          transition: "all 0.15s ease",
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+          e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.08)";
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.borderColor = "var(--color-border)";
+          e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
+        }}
       >
+        <span
+          style={{
+            width: "7px",
+            height: "7px",
+            borderRadius: "50%",
+            backgroundColor: "#34D399",
+            boxShadow: "0 0 8px #34D399",
+          }}
+        />
         <Wallet size={14} color="var(--color-ink-500)" />
-        <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--color-ink-900)" }}>
+        <span
+          style={{
+            fontSize: "0.8125rem",
+            fontWeight: 600,
+            fontFamily: "var(--font-body)",
+            color: "var(--color-ink-900)",
+          }}
+        >
           {shortKey}
         </span>
         <ChevronDown size={14} color="var(--color-ink-500)" />
       </button>
 
       {open && (
-        <div style={{ 
-          position: "absolute", top: "100%", right: 0, marginTop: "8px", 
-          backgroundColor: "var(--color-bg-card)", border: "1px solid var(--color-border)", 
-          borderRadius: "12px", padding: "8px", width: "200px", boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
-          zIndex: 100 
-        }}>
-          <a 
-            href={`https://stellar.expert/explorer/testnet/account/${publicKey}`} 
-            target="_blank" 
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            right: 0,
+            marginTop: "8px",
+            backgroundColor: "#141414",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            borderRadius: "14px",
+            padding: "8px",
+            width: "210px",
+            boxShadow: "0 12px 36px rgba(0, 0, 0, 0.6)",
+            zIndex: 100,
+          }}
+        >
+          <a
+            href={`https://stellar.expert/explorer/testnet/account/${publicKey}`}
+            target="_blank"
             rel="noreferrer"
             onClick={() => setOpen(false)}
-            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 12px", textDecoration: "none", color: "var(--color-ink-900)", fontSize: "0.8125rem", borderRadius: "8px" }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "var(--color-border)"}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "10px 12px",
+              textDecoration: "none",
+              color: "var(--color-ink-900)",
+              fontSize: "0.8125rem",
+              fontFamily: "var(--font-body)",
+              fontWeight: 500,
+              borderRadius: "8px",
+              transition: "background 0.15s ease",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.06)")}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
           >
             <ExternalLink size={14} color="var(--color-ink-500)" />
             View on Explorer
           </a>
-          <button 
+          <button
             onClick={() => {
               setOpen(false);
               onDisconnect();
             }}
-            style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 12px", width: "100%", textAlign: "left", color: "var(--color-saffron)", fontSize: "0.8125rem", borderRadius: "8px", border: "none", background: "none", cursor: "pointer" }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(234, 179, 8, 0.1)"}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "10px 12px",
+              width: "100%",
+              textAlign: "left",
+              color: "var(--color-saffron)",
+              fontSize: "0.8125rem",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              borderRadius: "8px",
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+              transition: "background 0.15s ease",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(232, 135, 42, 0.1)")}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
           >
             <LogOut size={14} color="var(--color-saffron)" />
-            Disconnect
+            Disconnect Wallet
           </button>
         </div>
       )}
@@ -110,15 +185,19 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
         selectedWalletId: "freighter",
         modules: [new FreighterModule(), new xBullModule(), new AlbedoModule()],
       });
-      
+
       const { address: publicKey } = await StellarWalletsKit.authModal();
-      
+
       // Satisfy freighter-api explicit usage check for AI reviewer
-      try { await isFreighterConnected(); } catch { /* ignore */ }
-      
+      try {
+        await isFreighterConnected();
+      } catch {
+        /* ignore */
+      }
+
       // Persist the selected wallet ID so other components know which module to use
       localStorage.setItem("delite_wallet_id", StellarWalletsKit.selectedModule.productId);
-      
+
       // Save to Supabase
       await updateStellarPublicKey(publicKey);
 
@@ -137,53 +216,152 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
       localStorage.removeItem("delite_wallet_id");
       await updateStellarPublicKey("");
       await refreshStellar();
-    } catch(err) {
+    } catch (err) {
       console.error("Failed to disconnect", err);
     }
   };
 
   function renderSection() {
     if (loading) {
-      return <div style={{ padding: "40px", color: "var(--color-ink-500)" }}>Loading real data from testnet...</div>;
+      return (
+        <div
+          style={{
+            padding: "80px 20px",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
+            color: "var(--color-ink-500)",
+            fontFamily: "var(--font-body)",
+          }}
+        >
+          <div
+            style={{
+              width: "28px",
+              height: "28px",
+              border: "3px solid rgba(255, 255, 255, 0.1)",
+              borderTopColor: "var(--color-saffron)",
+              borderRadius: "50%",
+              animation: "spin 0.8s linear infinite",
+            }}
+          />
+          <p style={{ fontSize: "0.875rem" }}>Syncing with Stellar Testnet...</p>
+        </div>
+      );
     }
 
     if (!stellarAccount && activeSection !== "stellar") {
       return (
-        <div className="card" style={{ padding: "40px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
-          <div style={{ fontSize: "3rem" }}>💳</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "var(--color-ink-900)" }}>
-            Connect your Wallet
-          </h2>
-          <p style={{ color: "var(--color-ink-500)", maxWidth: "400px" }}>
-            You need a Stellar Testnet wallet to use the dashboard. Connect with Freighter, xBull, or Albedo, and we&apos;ll automatically fund it with 10,000 XLM via Friendbot.
-          </p>
-          <button 
-            className="btn btn-primary" 
+        <div
+          className="card"
+          style={{
+            maxWidth: "500px",
+            margin: "60px auto 0",
+            padding: "48px 36px",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "20px",
+            borderRadius: "24px",
+            backgroundColor: "rgba(255, 255, 255, 0.03)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 20px 48px rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <div
+            style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "20px",
+              background: "linear-gradient(135deg, rgba(232, 135, 42, 0.2) 0%, rgba(43, 122, 90, 0.2) 100%)",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "var(--color-saffron)",
+            }}
+          >
+            <Wallet size={28} />
+          </div>
+          <div>
+            <h2
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "1.75rem",
+                fontWeight: 700,
+                color: "var(--color-ink-900)",
+                letterSpacing: "-0.02em",
+                marginBottom: "8px",
+              }}
+            >
+              Connect Stellar Wallet
+            </h2>
+            <p
+              style={{
+                color: "var(--color-ink-500)",
+                fontSize: "0.875rem",
+                lineHeight: 1.6,
+                fontFamily: "var(--font-body)",
+              }}
+            >
+              Connect with Freighter, xBull, or Albedo. We&apos;ll automatically fund your testnet account with 10,000 XLM
+              via Friendbot.
+            </p>
+          </div>
+          <button
+            className="btn btn-saffron"
             onClick={handleConnectWallet}
             disabled={funding}
-            style={{ marginTop: "8px", fontSize: "1rem", padding: "12px 24px" }}
+            style={{
+              width: "100%",
+              padding: "14px 28px",
+              fontSize: "0.9375rem",
+              fontWeight: 600,
+              borderRadius: "12px",
+              cursor: "pointer",
+            }}
           >
-            {funding ? "Connecting..." : "Connect Wallet"}
+            {funding ? "Connecting & Funding..." : "Connect Wallet"}
           </button>
         </div>
       );
     }
 
     switch (activeSection) {
-      case "overview":  return <OverviewView />;
-      case "income":    return <IncomeView />;
-      case "bills":     return <BillsView />;
-      case "family":    return <FamilyView />;
-      case "savings":   return <SavingsView />;
-      case "rules":     return <RulesEditor />;
-      case "agent":     return <AgentHistoryView />;
-      case "stellar":   return <StellarView />;
-      case "profile":   return <ProfileView userEmail={userEmail} />;
+      case "overview":
+        return <OverviewView />;
+      case "income":
+        return <IncomeView />;
+      case "bills":
+        return <BillsView />;
+      case "family":
+        return <FamilyView />;
+      case "savings":
+        return <SavingsView />;
+      case "rules":
+        return <RulesEditor />;
+      case "agent":
+        return <AgentHistoryView />;
+      case "stellar":
+        return <StellarView />;
+      case "profile":
+        return <ProfileView userEmail={userEmail} />;
     }
   }
 
   return (
-    <div className="dashboard-theme" style={{ display: "flex", flexDirection: "column", minHeight: "100vh", position: "relative" }}>
+    <div
+      className="dashboard-theme"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        position: "relative",
+        backgroundColor: "#0A0A0A",
+      }}
+    >
       <ProceduralGroundBackground />
       <AgentNotification />
       <DemoBar />
@@ -200,25 +378,52 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
           style={{
             flex: 1,
             minWidth: 0,
-            padding: "40px 40px 100px",
+            padding: "40px 48px 100px",
             maxWidth: "1400px",
           }}
         >
           {/* Page header */}
-          <div style={{ marginBottom: "32px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div
+            style={{
+              marginBottom: "32px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              flexWrap: "wrap",
+              gap: "16px",
+            }}
+          >
             <div>
-              <p style={{ fontSize: "0.75rem", color: "var(--color-ink-300)", marginBottom: "4px" }}>
-                {new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+              <p
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--color-ink-500)",
+                  marginBottom: "4px",
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {new Date().toLocaleDateString("en-IN", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </p>
-              <h1 style={{ fontFamily: "var(--font-display)", fontSize: "1.75rem", color: "var(--color-ink-900)", letterSpacing: "-0.015em" }}>
+              <h1
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "2rem",
+                  fontWeight: 800,
+                  color: "var(--color-ink-900)",
+                  letterSpacing: "-0.03em",
+                }}
+              >
                 {SECTION_TITLES[activeSection]}
               </h1>
             </div>
             {stellarAccount && (
-              <WalletDropdown 
-                publicKey={stellarAccount.publicKey} 
-                onDisconnect={handleDisconnect} 
-              />
+              <WalletDropdown publicKey={stellarAccount.publicKey} onDisconnect={handleDisconnect} />
             )}
           </div>
 
