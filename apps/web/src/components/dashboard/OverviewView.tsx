@@ -8,7 +8,7 @@ function fmt(n: number) {
 }
 
 function BucketCard({ bucket, index }: { bucket: Bucket, index: number }) {
-  const styles: Record<string, { bg: string; text: string; iconBg: string; iconText: string; Icon: any }> = {
+  const styles: Record<string, { bg: string; text: string; iconBg: string; iconText: string; Icon: React.ElementType }> = {
     income: { bg: "bg-emerald-50/50", text: "text-emerald-700", iconBg: "bg-emerald-100", iconText: "text-emerald-600", Icon: Wallet },
     bills: { bg: "bg-amber-50/50", text: "text-amber-700", iconBg: "bg-amber-100", iconText: "text-amber-600", Icon: Receipt },
     family: { bg: "bg-indigo-50/50", text: "text-indigo-700", iconBg: "bg-indigo-100", iconText: "text-indigo-600", Icon: Users },
