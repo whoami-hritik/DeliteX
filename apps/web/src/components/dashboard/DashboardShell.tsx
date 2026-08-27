@@ -23,7 +23,7 @@ import { FreighterModule } from "@creit.tech/stellar-wallets-kit/modules/freight
 import { xBullModule } from "@creit.tech/stellar-wallets-kit/modules/xbull";
 import { AlbedoModule } from "@creit.tech/stellar-wallets-kit/modules/albedo";
 import { isConnected as isFreighterConnected } from "@stellar/freighter-api";
-import { Wallet, LogOut, ExternalLink, ChevronDown, Sparkles } from "lucide-react";
+import { Wallet, LogOut, ExternalLink, ChevronDown } from "lucide-react";
 
 const SECTION_TITLES: Record<Section, string> = {
   overview: "Overview",
@@ -216,7 +216,7 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
       localStorage.removeItem("delite_wallet_id");
       await updateStellarPublicKey("");
       await refreshStellar();
-    } catch (err) {
+    } catch(err) {
       console.error("Failed to disconnect", err);
     }
   };
@@ -359,7 +359,7 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
         flexDirection: "column",
         minHeight: "100vh",
         position: "relative",
-        backgroundColor: "#0A0A0A",
+        backgroundColor: "transparent",
       }}
     >
       <ProceduralGroundBackground />
@@ -380,6 +380,7 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
             minWidth: 0,
             padding: "40px 48px 100px",
             maxWidth: "1400px",
+            backgroundColor: "transparent",
           }}
         >
           {/* Page header */}

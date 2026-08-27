@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const links = {
   Product: [
@@ -47,17 +48,18 @@ export default function Footer() {
         >
           {/* Wordmark col */}
           <div>
-            <Link href="/" style={{ display: "inline-block", marginBottom: "12px" }}>
-              <span
+            <Link href="/" aria-label="DeliteX home" style={{ display: "inline-block", marginBottom: "16px" }}>
+              <Image
+                src="/images/logo_transparent.png"
+                alt="DeliteX"
+                width={120}
+                height={36}
                 style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.375rem",
-                  color: "var(--color-ink-900)",
-                  letterSpacing: "-0.02em",
+                  height: "34px",
+                  width: "auto",
+                  objectFit: "contain",
                 }}
-              >
-                Delite<span style={{ color: "var(--color-saffron)" }}>X</span>
-              </span>
+              />
             </Link>
             <p
               style={{

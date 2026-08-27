@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   LayoutDashboard,
   Wallet,
@@ -96,9 +97,9 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
         style={{
           width: "240px",
           minHeight: "100vh",
-          backgroundColor: "rgba(10, 10, 10, 0.75)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
+          backgroundColor: "rgba(255, 255, 255, 0.02)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
           borderRight: "1px solid var(--color-border)",
           display: "flex",
           flexDirection: "column",
@@ -110,10 +111,10 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
           zIndex: 30,
         }}
       >
-        {/* Wordmark */}
+        {/* Logo */}
         <div
           style={{
-            padding: "24px 20px 20px",
+            padding: "20px 20px 18px",
             borderBottom: "1px solid var(--color-border)",
             display: "flex",
             alignItems: "center",
@@ -122,26 +123,25 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
         >
           <Link
             href="/"
+            aria-label="DeliteX home"
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "1.25rem",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              color: "var(--color-ink-900)",
               display: "flex",
               alignItems: "center",
-              gap: "2px",
+              textDecoration: "none",
             }}
           >
-            Delite
-            <span
+            <Image
+              src="/images/logo_transparent.png"
+              alt="DeliteX"
+              width={110}
+              height={34}
               style={{
-                color: "var(--color-saffron)",
-                textShadow: "0 0 16px rgba(232, 135, 42, 0.5)",
+                height: "32px",
+                width: "auto",
+                objectFit: "contain",
               }}
-            >
-              X
-            </span>
+              priority
+            />
           </Link>
           <span
             style={{

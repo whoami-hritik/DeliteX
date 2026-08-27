@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Step = "idle" | "payment" | "thinking" | "proposal" | "executing" | "done";
 
@@ -50,7 +51,19 @@ export default function DemoPage() {
         padding: "14px 32px", display: "flex", justifyContent: "space-between", alignItems: "center",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{ fontSize: "1.25rem", fontWeight: 900, letterSpacing: "-0.03em" }}>DeliteX</span>
+          <Link href="/" aria-label="DeliteX home" style={{ display: "flex", alignItems: "center" }}>
+            <Image
+              src="/images/logo_transparent.png"
+              alt="DeliteX"
+              width={110}
+              height={32}
+              style={{
+                height: "30px",
+                width: "auto",
+                objectFit: "contain",
+              }}
+            />
+          </Link>
           <span style={{ padding: "3px 10px", borderRadius: "100px", backgroundColor: "rgba(255,200,0,0.15)", border: "1px solid rgba(255,200,0,0.3)", fontSize: "0.7rem", fontWeight: 700, color: "#FFD700", letterSpacing: "0.06em" }}>
             🎭 DEMO
           </span>

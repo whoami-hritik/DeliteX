@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import AuthForm from "@/components/auth/AuthForm";
 
@@ -39,8 +40,19 @@ export default function LoginPage() {
           <div style={{ position: "absolute", top: -100, left: -100, right: -100, height: 200, background: "radial-gradient(ellipse at top, rgba(43, 122, 90, 0.2), transparent 70%)", pointerEvents: "none" }} />
           
           <div style={{ marginBottom: "36px", position: "relative", zIndex: 1 }}>
-            <Link href="/" style={{ fontFamily: "var(--font-display)", fontSize: "1.75rem", letterSpacing: "-0.02em", color: "#fff", display: "inline-block", marginBottom: "24px", textDecoration: "none" }}>
-              Delite<span style={{ color: "var(--color-jade)" }}>X</span>
+            <Link href="/" aria-label="DeliteX home" style={{ display: "inline-block", marginBottom: "24px", textDecoration: "none" }}>
+              <Image
+                src="/images/logo_transparent.png"
+                alt="DeliteX"
+                width={130}
+                height={40}
+                style={{
+                  height: "38px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+                priority
+              />
             </Link>
             <h1
               style={{
