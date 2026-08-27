@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   LayoutDashboard,
+  Building2,
   Wallet,
   Receipt,
   Users,
@@ -18,13 +19,18 @@ import {
   LogOut,
 } from "lucide-react";
 
-type Section = "overview" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
+type Section = "overview" | "treasury" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
   {
     id: "overview",
     label: "Overview",
     icon: <LayoutDashboard size={18} />,
+  },
+  {
+    id: "treasury",
+    label: "Treasury",
+    icon: <Building2 size={18} />,
   },
   {
     id: "income",

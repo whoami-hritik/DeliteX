@@ -1,7 +1,8 @@
 [workspace]
 members = [
     "vault",
-    "router"
+    "router",
+    "treasury"
 ]
 resolver = "2"
 
