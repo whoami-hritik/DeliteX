@@ -86,10 +86,10 @@ All contracts are written in Rust with `soroban-sdk = "=22.0.0"`, compiled to `w
 
 | Contract | Address | Explorer |
 |----------|---------|---------|
-| **Tax Escrow Vault** | `CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4) |
-| **Fiat Ramp Router** | `CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2) |
-| **Invoice Factoring Pool** | `CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA) |
-| **Cross-Currency Invoice Router** | `CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I) |
+| **Tax Escrow Vault** | `CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV) |
+| **Fiat Ramp Router** | `CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7) |
+| **Invoice Factoring Pool** | `CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW) |
+| **Cross-Currency Invoice Router** | `CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B) |
 | **Liquidity Sweeper Vault** | `CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64) |
 | **Corporate Treasury Vault** | `CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53) |
 | **Payment Router** | `CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2) |
