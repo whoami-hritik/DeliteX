@@ -2,14 +2,15 @@
 
 # Delite
 
-### Agentic Remittance, Multi-Sig Treasury & Automated Income Routing on Stellar Soroban
+### Agentic Remittance, Multi-Sig Treasury & Zero-Idle Yield Engine on Stellar Soroban
 
-Automate Global Payroll · Multi-Sig Treasury · Autonomous Routing · Built on Stellar Testnet
+Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Cash Sweeper · Built on Stellar Testnet
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Delite%20App-6366f1?style=flat-square)](https://delite-x-web.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-0ea5e9?style=flat-square)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Contracts-Soroban%20v22-8b5cf6?style=flat-square)](https://soroban.stellar.org)
 [![Treasury](https://img.shields.io/badge/Treasury-M--of--N%20Multisig-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
+[![Sweeper](https://img.shields.io/badge/Sweeper-Zero--Idle%20Vault-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2016-black?style=flat-square)](https://nextjs.org)
 [![CI](https://img.shields.io/badge/CI-Passing-22c55e?style=flat-square)](#)
 
@@ -19,7 +20,13 @@ Automate Global Payroll · Multi-Sig Treasury · Autonomous Routing · Built on 
 
 ## What's New
 
-### Corporate Multi-Sig Treasury & 1-Click Batch Payroll Engine
+### 1. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
+We have deployed an on-chain automated liquidity sweeping vault on Soroban:
+- **Zero-Idle Compounding:** Idle funds earn automated compound yield (7.40% APY) inside a $c$-token share vault without manual staking.
+- **Atomic "Sweep & Pay" Engine:** When bills, contractor payouts, or family remittances occur, the vault atomically burns the exact required shares, redeems funds, and pays the destination in a single transaction block.
+- **Live Testnet Contract:** [`CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64`](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
+
+### 2. Corporate Multi-Sig Treasury & 1-Click Batch Payroll
 We have deployed an on-chain corporate treasury governance and batch disbursement engine natively on Soroban:
 - **M-of-N Cryptographic Consensus:** Organizations configure $N$ executive signer keys and require $M$ cryptographic approvals before treasury capital can be moved.
 - **1-Click CSV Batch Payroll:** Upload a contractor spreadsheet (`Name, Stellar Address, Amount`) and execute up to 100 contractor disbursements in a single atomic transaction.
@@ -34,19 +41,19 @@ Delite is a full-stack, non-custodial financial operating system and remittance 
 
 ### Core Protocol Stack & Features
 
-1. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
+1. **Automated Liquidity Sweeper & Yield Vault (`yield_sweeper`)**
+   - **Zero-Idle Cash Compounding**: Continuous second-by-second yield compounding at 7.40% APY via Soroban share tokens.
+   - **Atomic Sweep-on-Debit**: Unwinds exact required funds from the yield vault only at the exact millisecond a payment executes, eliminating manual un-staking friction.
+
+2. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
    - **M-of-N Cryptographic Consensus**: Define multiple executive keys requiring on-chain threshold approvals before releasing capital.
    - **1-Click CSV Payroll Processor**: Drag-and-drop contractor payroll spreadsheets with automated Stellar address validation and batch total calculation.
    - **Atomic Multi-Transfer Router**: Atomically disburses funds across all recipients in a single transaction loop with zero partial failure risk.
 
-2. **Autonomous On-Chain Payment Splitting (`router`)**
+3. **Autonomous On-Chain Payment Splitting (`router`)**
    - **Declarative Income Matrix**: When incoming paychecks or invoices arrive, the router intercepts the funds and splits them deterministically.
    - **Multi-Bucket Allocation**: Automatically partitions incoming revenue into customizable buckets: Bills, Family Remittance, and Yield Vaults.
    - **Zero Custody**: All fund flows execute directly on-chain via user-authorized Soroban contracts.
-
-3. **Decentralized Yield Vaults (`vault`)**
-   - **Automated Yield Compounding**: Idle savings are routed to an ERC-4626 style Soroban vault for automated yield generation.
-   - **Instant Liquidity**: Users deposit and withdraw funds on demand without locking penalties.
 
 4. **Web3 Authentication & Profile Management**
    - **Multi-Wallet Support**: Seamless connection with Freighter, xBull, and Albedo wallets via `@creit.tech/stellar-wallets-kit`.
@@ -61,6 +68,7 @@ All contracts are written in Rust with `soroban-sdk = "=22.0.0"`, compiled to `w
 
 | Contract | Address | Explorer |
 |----------|---------|---------|
+| **Liquidity Sweeper Vault** | `CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64) |
 | **Corporate Treasury Vault** | `CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53) |
 | **Payment Router** | `CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2) |
 | **Yield Vault** | `CAQFOWQLHE3BBOAGMJZNPCIASUOSJJCUQLJE6V6VSMW7H7ST4OOHD77C` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAQFOWQLHE3BBOAGMJZNPCIASUOSJJCUQLJE6V6VSMW7H7ST4OOHD77C) |
@@ -96,12 +104,12 @@ DeliteX/
 │       │   │   │   ├── DashboardShell.tsx   # Glassmorphic Layout & Wallet Bar
 │       │   │   │   ├── OverviewView.tsx     # Account Overview & Bucket Cards
 │       │   │   │   ├── TreasuryView.tsx     # Multi-Sig Treasury & Batch Payroll UI
+│       │   │   │   ├── SavingsView.tsx      # Automated Liquidity Sweeper & Yield UI
 │       │   │   │   ├── RulesEditor.tsx      # Natural Language Rule Configurator
 │       │   │   │   ├── Sidebar.tsx          # Navigation Sidebar with Active Indicators
 │       │   │   │   ├── IncomeView.tsx       # Incoming Payment Stream Tracker
 │       │   │   │   ├── BillsView.tsx        # Automated Bills & Subscriptions
-│       │   │   │   ├── FamilyView.tsx       # Remittance & Beneficiary List
-│       │   │   │   └── SavingsView.tsx      # Yield Vault Analytics & Deposits
+│       │   │   │   └── FamilyView.tsx       # Remittance & Beneficiary List
 │       │   │   └── ui/                  # Shared Primitive UI Elements
 │       │   │       └── ProceduralGroundBackground.tsx # WebGL Shader Background
 │       │   │
@@ -110,6 +118,7 @@ DeliteX/
 │       │   │
 │       │   └── lib/                    # Web3, Stellar SDK & Data Utilities
 │       │       ├── stellar/            # Stellar & Soroban Client Libraries
+│       │       │   ├── sweeper.ts      # Liquidity sweeper compounding calculations
 │       │       │   ├── treasury.ts     # Batch CSV parser & Multisig helpers
 │       │       │   ├── accounts.ts     # Testnet account creation & funding
 │       │       │   ├── contracts.ts    # Soroban Contract ABI interfaces
@@ -120,6 +129,8 @@ DeliteX/
 │       └── package.json                # Web App Dependencies (Next 16, Stellar SDK)
 │
 ├── contracts/                          # Soroban Smart Contracts (Rust Workspace)
+│   ├── yield_sweeper/                  # Automated Liquidity Sweeper & Yield Engine
+│   │   └── src/lib.rs                  # Share-based accounting & atomic sweep-and-pay
 │   ├── treasury/                       # Multi-Sig Corporate Treasury & Batch Payroll
 │   │   └── src/lib.rs                  # M-of-N threshold consensus & atomic payouts
 │   ├── router/                         # Autonomous Payment Splitting Contract
@@ -127,6 +138,7 @@ DeliteX/
 │   ├── vault/                          # Yield-Generation Vault Contract
 │   │   └── src/lib.rs                  # ERC-4626 style deposit, withdraw & balances
 │   ├── scripts/                        # Deployment & Initialization Scripts
+│   │   ├── deploy-sweeper.js           # Deploys Yield Sweeper contract to Testnet
 │   │   ├── deploy-treasury.js          # Deploys Treasury contract to Testnet
 │   │   ├── deploy.js                   # Deploys Router & Vault contracts
 │   │   ├── init.js                     # Initializes Router contract parameters
@@ -244,13 +256,13 @@ DeliteX/
  │                  Stellar Horizon & Soroban RPC                     │
  └────────────────────────────┬───────────────────────────────────────┘
                               │
-              ┌───────────────┼───────────────┐
-              ▼               ▼               ▼
- ┌──────────────────┐ ┌───────────────┐ ┌─────────────────────────────┐
- │  Treasury Vault  │ │ Payment Router│ │        Yield Vault          │
- │  (M-of-N Multisig│ │ (Autonomous   │ │   (ERC-4626 Style Yield     │
- │   Batch Payroll) │ │  Fund Splits) │ │        Generation)          │
- └──────────────────┘ └───────────────┘ └─────────────────────────────┘
+     ┌────────────────────────┼────────────────────────┬────────────────────────┐
+     ▼                        ▼                        ▼                        ▼
+┌───────────────┐     ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
+│ Yield Sweeper │     │Treasury Vault │        │Payment Router │        │  Yield Vault  │
+│ (Zero-Idle    │     │(M-of-N Multi  │        │(Autonomous    │        │  (ERC-4626    │
+│  Auto-Yield)  │     │ Batch Payroll)│        │ Fund Splits)  │        │   Compounding)│
+└───────────────┘     └───────────────┘        └───────────────┘        └───────────────┘
 ```
 
 ---
@@ -288,7 +300,7 @@ pnpm run dev
 cargo build --manifest-path contracts/Cargo.toml --target wasm32-unknown-unknown --release
 
 # Build specific contract using Stellar CLI
-stellar contract build --manifest-path contracts/treasury/Cargo.toml
+stellar contract build --manifest-path contracts/yield_sweeper/Cargo.toml
 
 # Run smart contract unit tests
 cargo test --manifest-path contracts/Cargo.toml
@@ -299,9 +311,10 @@ cargo test --manifest-path contracts/Cargo.toml
 ## Security & Non-Custodial Architecture
 
 - **Client-Side Key Management**: Delite never stores or transmits private keys. All cryptographic signing happens locally inside the user's browser extension via `@creit.tech/stellar-wallets-kit`.
-- **Soroban `require_auth`**: Every state-changing function across Treasury, Router, and Vault enforces cryptographic caller authentication.
+- **Soroban `require_auth`**: Every state-changing function across Sweeper, Treasury, Router, and Vault enforces cryptographic caller authentication.
+- **Zero-Idle Capital Efficiency**: 100% of idle capital remains inside the Soroban Vault earning continuous compounding interest and is unwound atomically at the exact millisecond of payment execution.
 - **M-of-N Multisig Guarantees**: Corporate disbursements cannot execute without satisfying the on-chain threshold of authorized owner signatures.
-- **Atomic Rollbacks**: Batch operations revert completely if any single recipient transfer encounters an error, preventing partial disbursements or trapped capital.
+- **Atomic Rollbacks**: Operations revert completely if any single recipient transfer encounters an error, preventing partial disbursements or trapped capital.
 
 ---
 
