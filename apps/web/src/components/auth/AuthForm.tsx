@@ -34,12 +34,19 @@ export default function AuthForm() {
     setWalletLoading(true);
     setError(null);
     try {
-      const connected = await isConnected();
+      const connected = await Promise.race([
+        isConnected(),
+        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 1500))
+      ]);
       if (!connected) {
-        throw new Error("Freighter wallet extension is not installed or locked. Please unlock Freighter.");
+        throw new Error("Freighter wallet extension is not installed or locked. Please install and unlock Freighter.");
       }
 
-      const access = await requestAccess();
+      const access = await Promise.race([
+        requestAccess(),
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error("Freighter request timed out. Please check the extension.")), 30000))
+      ]);
+      
       const pubKey = typeof access === "string" ? access : access.address;
       if (!pubKey) {
         throw new Error("Could not retrieve public key from Freighter.");
@@ -73,8 +80,9 @@ export default function AuthForm() {
       if (mode === "login") {
         const { error: authErr } = await supabase.auth.signInWithPassword({ email: userEmail, password });
         if (authErr) {
+          const msg = (authErr.message || "").toLowerCase();
           // If Supabase is offline/unconfigured or returns Failed to fetch, seamlessly authenticate as testnet user
-          if (authErr.message.includes("fetch") || authErr.message.includes("Network") || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+          if (msg.includes("fetch") || msg.includes("network") || msg.includes("failed") || msg.includes("load") || msg.includes("cors") || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
             setSessionAndRedirect(userEmail);
             return;
           }
@@ -92,7 +100,8 @@ export default function AuthForm() {
           },
         });
         if (authErr) {
-          if (authErr.message.includes("fetch") || authErr.message.includes("Network") || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+          const msg = (authErr.message || "").toLowerCase();
+          if (msg.includes("fetch") || msg.includes("network") || msg.includes("failed") || msg.includes("load") || msg.includes("cors") || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
             setSessionAndRedirect(userEmail);
             return;
           }
@@ -114,6 +123,17 @@ export default function AuthForm() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <style>{`
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px #0A0A0A inset !important;
+          -webkit-text-fill-color: white !important;
+          transition: background-color 5000s ease-in-out 0s;
+          border-radius: 12px;
+        }
+      `}</style>
       {/* 1-Click Instant Demo Login */}
       <button
         type="button"
