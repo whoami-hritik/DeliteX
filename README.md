@@ -7,6 +7,7 @@
 Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Currency Invoicing · Instant Factoring · Direct Bank Off-Ramp · Tax Escrow · Built on Stellar Testnet
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Delite%20App-6366f1?style=flat-square)](https://delite-x-web.vercel.app/)
+[![User Feedback](https://img.shields.io/badge/User%20Feedback-Live%20Onboarding%20Responses-10b981?style=flat-square)](https://docs.google.com/spreadsheets/d/e/2PACX-1vTgVIIIMvIPay_pSydzaoXReBWiHQVnfCydVe5mCN5MsJBXJL7taSVapETTAnIZbdL47HVmX2eAJ6rJ/pubhtml)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-0ea5e9?style=flat-square)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Contracts-Soroban%20v22-8b5cf6?style=flat-square)](https://soroban.stellar.org)
 [![Tax Escrow](https://img.shields.io/badge/Tax%20Escrow-Yield%20Compounding-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4)
@@ -17,6 +18,8 @@ Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Curr
 [![Sweeper](https://img.shields.io/badge/Sweeper-Zero--Idle%20Vault-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2016-black?style=flat-square)](https://nextjs.org)
 [![CI](https://img.shields.io/badge/CI-Passing-22c55e?style=flat-square)](#)
+
+> 📊 **User Onboarding Feedback & Validation**: [View Public User Onboarding & Feedback Sheet ↗](https://docs.google.com/spreadsheets/d/e/2PACX-1vTgVIIIMvIPay_pSydzaoXReBWiHQVnfCydVe5mCN5MsJBXJL7taSVapETTAnIZbdL47HVmX2eAJ6rJ/pubhtml)
 
 </div>
 
@@ -226,6 +229,7 @@ DeliteX/
 | Resource | Details |
 |----------|---------|
 | **Live Application** | [https://delite-x-web.vercel.app/](https://delite-x-web.vercel.app/) |
+| **User Onboarding Feedback** | [📊 View Live User Feedback Responses Sheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vTgVIIIMvIPay_pSydzaoXReBWiHQVnfCydVe5mCN5MsJBXJL7taSVapETTAnIZbdL47HVmX2eAJ6rJ/pubhtml) |
 | **GitHub Repository** | [https://github.com/whoami-hritik/DeliteX](https://github.com/whoami-hritik/DeliteX) |
 | **Network** | Stellar Testnet |
 | **Soroban RPC** | `https://soroban-testnet.stellar.org` |
@@ -325,53 +329,95 @@ cargo test --manifest-path contracts/Cargo.toml
 
 ---
 
-## Screenshots
+## 📸 Product Screenshots & Walkthrough
 
-### Landing Page
+### 1. Landing Page & Gateway
 ![Landing Page](apps/web/public/Screenshots/Landing%20Page.png)
-> Delite's entry point — glassmorphic hero with WebGL procedural background, wallet connect, and live feature overview.
+> **Gateway to Agentic Finance**: Delite's entry point featuring a glassmorphic hero with WebGL procedural shader canvas, non-custodial Stellar wallet authentication, and live protocol feature suite.
 
 ---
 
-### Dashboard Overview
+### 2. Financial OS & Central Dashboard
 ![Dashboard](apps/web/public/Screenshots/Dashbaord.png)
-> Financial OS overview tracking available reserves, smart buckets (Bills, Remittance, Savings), and recent transactions.
+> **Unified Liquidity Command Center**: Real-time asset tracking across liquid reserves, smart automated budget buckets (Bills, Remittances, Savings, Tax Reserves), and incoming payment feeds.
 
 ---
 
-### AI Allocation Rule Editor
+### 3. Corporate Multi-Sig Treasury & Approval Matrix
+![Corporate Treasury](apps/web/public/Screenshots/Corporate%20Treasury.png)
+> **M-of-N Cryptographic Governance**: Non-custodial enterprise treasury requiring multi-party quorum authorization before executing transactions with transparent signer tracking.
+
+---
+
+### 4. 1-Click Multi-Sig Batch Payroll Execution
+![Multi-Sig Payroll Batch](apps/web/public/Screenshots/Multi%20Sig%20payrooll%20Batch.png)
+> **Atomic Contractor Payroll**: Disburse batch payroll to up to 100 global contractor wallets in a single atomic transaction block with zero execution or double-spend risk.
+
+---
+
+### 5. Instant Invoice Factoring & Working Capital Pool
+![Working Capital & Factoring](apps/web/public/Screenshots/Working%20Cap.png)
+> **80% Instant LTV Cash Advances**: Agencies and freelancers lock verified Net-30/60 client invoices and receive immediate liquid USDC capital with automated escrow self-repayment upon settlement.
+
+---
+
+### 6. Atomic Cross-Currency Smart Invoicing & Path Payment
+![Smart Invoicing](apps/web/public/Screenshots/Smart%20Invoicing.png)
+> **DEX Path-Routed Global Billing**: Create verifiable on-chain invoices payable in EURC, XLM, or USDC via automated DEX path routing with zero FX spread losses.
+
+---
+
+### 7. Automated Local Fiat Off-Ramp & Direct Bank Settlement
+![Fiat Off-Ramp](apps/web/public/Screenshots/Fiat%20Off%20Ramp.png)
+> **35-Second Domestic Bank Settlement**: Autonomous conversion and payout of on-chain USDC directly into domestic bank rails via UPI/IMPS (India), SEPA Instant (Europe), Pix (Brazil), and FedNow/ACH (US).
+
+---
+
+### 8. Autonomous Execution Rules & Routing Matrix
+![Rule Book](apps/web/public/Screenshots/Rule%20Book.png)
+> **Visual Financial Automation Rulebook**: Define algorithmic policies for automated income splitting, scheduled bill disbursements, and zero-idle capital rebalances.
+
+---
+
+### 9. AI Natural Language Rule Configurator
 ![Agentic AI](apps/web/public/Screenshots/Agentic%20Ai.png)
-> Interactive rule configurator for converting plain-text financial goals into on-chain Soroban routing matrices.
+> **Natural Language Intent to Smart Contract Rules**: Interactive AI assistant that translates natural language financial intentions into mathematical Soroban execution matrices.
 
 ---
 
-### Family & Remittance Management
+### 10. Cross-Border Beneficiary & Family Remittance
 ![Family & Remittance](apps/web/public/Screenshots/Family%20&%20Remitance.png)
-> Manage global beneficiaries and verify automated cross-border settlements in real time.
+> **Zero-Fee Global Remittances**: Stream automated salary allocations directly to family members and dependents across international borders in real time.
 
 ---
 
-### Deployed Vault Contract
+### 11. Automated On-Chain Tax Withholding & Yield Escrow
+![Tax Escrow Vault](apps/web/public/Screenshots/Tax%20Escrow%20Vault.png)
+> **Autonomous Tax Slicing & 7.4% APY Compounding**: Automatically slice IRS 1099, India TDS/GST, and UK HMRC brackets on inflow, earning continuous compound yield until 1-click quarterly filing.
+
+---
+
+### 12. Deployed Soroban Vault Contract
 ![Deployed Vault Contract](apps/web/public/Screenshots/Deployed%20Vault%20Contract.png)
-> Verified yield vault contract on Stellar Testnet showing on-chain storage and WASM execution metrics.
+> **Verified On-Chain Architecture**: Live ERC-4626 style yield vault contract deployed on Stellar Soroban Testnet displaying ledger state and WASM storage metrics.
 
 ---
 
-### Vault Deposit Transaction
+### 13. Vault Compounding & Deposit Transaction
 ![Vault Transaction](apps/web/public/Screenshots/Vault%20Transaction.png)
-> On-chain confirmation of automated fund routing into the Soroban Yield Vault.
+> **Zero-Idle Yield Compounding**: Confirmed on-chain transaction routing surplus treasury capital into the Soroban compounding vault for continuous yield generation.
 
 ---
 
-### Real-World Transaction Proof
+### 14. Real-World Ledger Transaction Proof
 ![Transaction Proof](apps/web/public/Screenshots/Transaction%20Proof.png)
-> Real-time ledger confirmation of payment interception and automated splitting.
+> **Verifiable Blockchain Finality**: Direct transaction proof on the Stellar ledger with sub-second settlement confirmation and transparent cryptographic hashes.
 
 ---
 
-### CI/CD Pipeline
+### 15. Turborepo CI/CD & Automated Pipeline
 ![CI CD Pipeline](apps/web/public/Screenshots/CI%20CD%20Pipeline.png)
-> Turborepo automated build and type-checking pipelines ensuring zero regression.
+> **Enterprise Reliability**: Automated Turborepo continuous integration pipeline verifying smart contract tests, TypeScript build, and strict lint checks on every commit.
 
 ---
 
