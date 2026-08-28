@@ -112,7 +112,13 @@ export default function Sidebar({ activeSection, onNavigate, userEmail, pendingD
 
   async function handleSignOut() {
     setSigningOut(true);
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch {
+      /* ignore */
+    }
+    document.cookie = "delite_session_user=; path=/; max-age=0";
+    document.cookie = "delite_demo_session=; path=/; max-age=0";
     router.push("/");
     router.refresh();
   }
