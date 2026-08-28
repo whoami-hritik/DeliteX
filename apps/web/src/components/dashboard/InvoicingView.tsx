@@ -147,7 +147,7 @@ export default function InvoicingView() {
         nativeToScVal(Math.floor(totalCalculatedInvoice * 10000000), { type: "i128" })
       ];
 
-      const txHash = await invokeSorobanMethod(
+      await invokeSorobanMethod(
         process.env.NEXT_PUBLIC_SOROBAN_INVOICE_ROUTER_ID || "CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I",
         "create_invoice",
         args
@@ -169,8 +169,8 @@ export default function InvoicingView() {
       setInvoices([newInvoice, ...invoices]);
       toast.success(`🎉 Smart invoice ${newInvoice.invoiceNumber} successfully deployed on-chain!`);
       setActiveTab("invoices");
-    } catch (e: any) {
-      toast.error(`Invoice Creation Failed: ${e.message}`);
+    } catch (e: unknown) {
+      toast.error(`Invoice Creation Failed: ${(e as Error).message}`);
     } finally {
       setIsProcessing(false);
       setNewClientName("");

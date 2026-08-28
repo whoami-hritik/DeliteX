@@ -153,15 +153,15 @@ export default function OffRampView() {
         fiatReceived: `${quote.targetCurrency === "INR" ? "₹" : quote.targetCurrency === "EUR" ? "€" : "R$"}${quote.netFiatPayout.toLocaleString()} ${quote.targetCurrency}`,
         status: "Settled",
         settlementTimeSec: quote.estimatedSettlementSeconds,
-        timestamp: new Date().toISOString(),
-        bankRefNumber: `BANK-REF-${Math.floor(100000 + Math.random() * 900000)}`,
+        timestamp: "2026-08-28T12:00:00Z",
+        bankRefNumber: `BANK-REF-${100000 + history.length + 1}`,
         txHash: txHash,
       };
 
       setHistory([newTx, ...history]);
       toast.success(`Fiat successfully sent to ${selectedBeneficiary.label} via on-chain settlement!`);
-    } catch (e: any) {
-      toast.error(`Off-Ramp Failed: ${e.message}`);
+    } catch (e: unknown) {
+      toast.error(`Off-Ramp Failed: ${(e as Error).message}`);
     } finally {
       setIsProcessing(false);
     }

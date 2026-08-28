@@ -33,21 +33,20 @@ export async function invokeSorobanMethod(
     throw new Error(`Freighter signature failed or rejected`);
   }
 
-  let finalXdr = typeof signedXdr === 'string' ? signedXdr : (signedXdr as any).signedTxXdr;
-  if (!finalXdr) finalXdr = signedXdr;
+  const finalXdr = typeof signedXdr === "string" ? signedXdr : (signedXdr as unknown as { signedTxXdr?: string }).signedTxXdr || String(signedXdr);
   
   const signedTx = TransactionBuilder.fromXDR(finalXdr, STELLAR_NETWORK_PASSPHRASE) as Transaction;
   
   const sendRes = await server.sendTransaction(signedTx);
   if (sendRes.status === "ERROR") {
-    throw new Error(`Transaction rejected by network: ` + JSON.stringify((sendRes as any).errorResultXdr || (sendRes as any).errorResult));
+    const errorDetails = sendRes.errorResult ? String(sendRes.errorResult) : "Contract execution rejected";
+    throw new Error(`Transaction rejected by network: ${errorDetails}`);
   }
   
   let status = "PENDING";
-  let receipt;
   while (status === "PENDING") {
     await new Promise(r => setTimeout(r, 2000));
-    receipt = await server.getTransaction(sendRes.hash);
+    const receipt = await server.getTransaction(sendRes.hash);
     status = receipt.status;
   }
   
@@ -57,3 +56,4 @@ export async function invokeSorobanMethod(
   
   return sendRes.hash;
 }
+

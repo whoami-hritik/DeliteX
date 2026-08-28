@@ -122,7 +122,7 @@ export default function TaxView() {
     try {
       // Lazy load to avoid SSR issues
       const { invokeSorobanMethod } = await import("@/lib/stellar/soroban");
-      const { xdr, Address, nativeToScVal } = await import("@stellar/stellar-sdk");
+      const { Address, nativeToScVal } = await import("@stellar/stellar-sdk");
       const { requestAccess } = await import("@stellar/freighter-api");
 
       const access = await requestAccess();
@@ -151,7 +151,7 @@ export default function TaxView() {
         taxAuthorityName: selectedJurisdiction.taxAuthorityName,
         timestamp: new Date().toISOString(),
         txHash: txHash,
-        complianceCertHash: `SHA256: ${Math.random().toString(16).substring(2, 12)}${Math.random().toString(16).substring(2, 12)}`,
+        complianceCertHash: `SHA256: ${Date.now().toString(16)}${Date.now().toString(16)}`,
       };
 
       setFilings([newFiling, ...filings]);
@@ -161,8 +161,8 @@ export default function TaxView() {
       });
       setIsFilingModalOpen(false);
       toast.success(`🎉 $${amt.toLocaleString()} USDC tax payment settled on-chain to ${selectedJurisdiction.taxAuthorityName}!`);
-    } catch (e: any) {
-      toast.error(`Transaction Failed: ${e.message}`);
+    } catch (e: unknown) {
+      toast.error(`Transaction Failed: ${(e as Error).message}`);
     } finally {
       setIsProcessing(false);
     }

@@ -127,8 +127,8 @@ export default function FactoringView() {
       setActiveTab("positions");
       setReqAmount("");
       toast.success(`🎉 Cash advance of $${advanceMath.advanceAmount} USDC successfully funded on-chain!`);
-    } catch (e: any) {
-      toast.error(`Advance Request Failed: ${e.message}`);
+    } catch (e: unknown) {
+      toast.error(`Advance Request Failed: ${(e as Error).message}`);
     } finally {
       setIsProcessing(false);
     }
