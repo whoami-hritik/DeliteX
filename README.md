@@ -2,16 +2,17 @@
 
 # Delite
 
-### Agentic Remittance, Multi-Sig Treasury & Cross-Currency Invoicing on Stellar Soroban
+### Agentic Remittance, Multi-Sig Treasury & Instant Working Capital on Stellar Soroban
 
-Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Currency Invoicing · Built on Stellar Testnet
+Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Currency Invoicing · Instant Factoring · Built on Stellar Testnet
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Delite%20App-6366f1?style=flat-square)](https://delite-x-web.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-0ea5e9?style=flat-square)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Contracts-Soroban%20v22-8b5cf6?style=flat-square)](https://soroban.stellar.org)
+[![Factoring](https://img.shields.io/badge/Factoring-Working%20Capital%20Advance-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
+[![Invoicing](https://img.shields.io/badge/Invoicing-Path%20Payment-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
 [![Treasury](https://img.shields.io/badge/Treasury-M--of--N%20Multisig-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
 [![Sweeper](https://img.shields.io/badge/Sweeper-Zero--Idle%20Vault-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
-[![Invoicing](https://img.shields.io/badge/Invoicing-Path%20Payment-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2016-black?style=flat-square)](https://nextjs.org)
 [![CI](https://img.shields.io/badge/CI-Passing-22c55e?style=flat-square)](#)
 
@@ -21,60 +22,52 @@ Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Curr
 
 ## What's New
 
-### 1. Atomic Cross-Currency Invoicing & Path Payment Checkout Engine
-We have deployed an on-chain smart invoicing protocol on Soroban coupled with Stellar L1 path payments:
+### 1. Instant Invoice Factoring & Working Capital Liquidity Pool
+We have deployed an on-chain working capital financing pool on Soroban:
+- **80% Instant Cash Advances:** Agencies and freelancers lock verified Net-30/60 unpaid invoices and receive 80% liquid USDC in their wallet in under 5 seconds.
+- **Automated Self-Repaying Settlement:** When the debtor settles the invoice via `InvoiceRouter`, the smart contract intercepts the payment, repays the pool principal + 1.5% discount fee, and forwards the 20% remainder to the merchant.
+- **LP Liquidity Yield (14.2% APY):** Liquidity providers stake USDC into the factoring pool to earn continuous factoring discount yields.
+- **Live Testnet Contract:** [`CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW`](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
+
+### 2. Atomic Cross-Currency Invoicing & Path Payment Checkout
 - **Instant Cross-Asset Settlement:** Invoices denominated in USDC can be settled by global payers using EURC, XLM, or USDC via automated DEX path routing with zero hidden FX spreads.
-- **Verifiable On-Chain Status:** Invoices register directly on Soroban with deterministic states (`Unpaid`, `Paid`, `Cancelled`) and emit real-time settlement events.
-- **1-Click Shareable Checkout Links:** Payers connect their wallet, inspect real-time interbank conversion rates, and settle in 3.5 seconds.
 - **Live Testnet Contract:** [`CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B`](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
 
-### 2. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
-We have deployed an on-chain automated liquidity sweeping vault on Soroban:
-- **Zero-Idle Compounding:** Idle funds earn automated compound yield (7.40% APY) inside a $c$-token share vault without manual staking.
-- **Atomic "Sweep & Pay" Engine:** When bills, contractor payouts, or family remittances occur, the vault atomically burns the exact required shares, redeems funds, and pays the destination in a single transaction block.
+### 3. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
+- **Zero-Idle Compounding:** Idle funds earn automated compound yield (7.40% APY) inside a $c$-token share vault with atomic `sweep_and_pay()` execution for bills and remittances.
 - **Live Testnet Contract:** [`CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64`](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
 
-### 3. Corporate Multi-Sig Treasury & 1-Click Batch Payroll
-We have deployed an on-chain corporate treasury governance and batch disbursement engine natively on Soroban:
-- **M-of-N Cryptographic Consensus:** Organizations configure $N$ executive signer keys and require $M$ cryptographic approvals before treasury capital can be moved.
-- **1-Click CSV Batch Payroll:** Upload a contractor spreadsheet (`Name, Stellar Address, Amount`) and execute up to 100 contractor disbursements in a single atomic transaction.
-- **Zero External Gas Waste & Atomic Rollback:** If any single recipient address or transfer fails, the entire transaction reverts safely on-chain with zero lost funds.
+### 4. Corporate Multi-Sig Treasury & 1-Click Batch Payroll
+- **M-of-N Cryptographic Consensus:** Organizations configure $N$ executive signer keys and require $M$ approvals to disburse payroll across up to 100 contractors in a single atomic transaction block.
 - **Live Testnet Contract:** [`CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53`](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
 
 ---
 
 ## Comprehensive Overview
 
-Delite is a full-stack, non-custodial financial operating system and remittance router built natively for the Stellar and Soroban ecosystem. Delite automates cross-border income flows, multi-sig corporate treasuries, smart cross-currency invoicing, and decentralized savings streams, replacing slow banking rails with instant, cryptographic smart contracts.
+Delite is a full-stack, non-custodial financial operating system and remittance router built natively for the Stellar and Soroban ecosystem. Delite automates cross-border income flows, multi-sig corporate treasuries, instant working capital factoring, and decentralized savings streams, replacing slow banking rails with instant, cryptographic smart contracts.
 
 ### Core Protocol Stack & Features
 
-1. **Atomic Cross-Currency Invoicing (`invoice_router`)**
+1. **Instant Invoice Factoring & Working Capital (`invoice_factoring`)**
+   - **80% LTV Instant Cash Advances**: Receive instant working capital on Net-30 invoices without traditional bank credit checks or personal guarantees.
+   - **Self-Repaying On-Chain Escrow**: Automatically repays advances and remits residual funds on client settlement.
+
+2. **Atomic Cross-Currency Invoicing (`invoice_router`)**
    - **Multi-Asset DEX Path Routing**: Clients in Europe or across the globe pay invoices in EURC or XLM; merchants receive exact USDC settlement directly on-chain.
    - **Verifiable Receipt Registry**: On-chain invoice lifecycle management with automated receipt generation and transaction hashes.
 
-2. **Automated Liquidity Sweeper & Yield Vault (`yield_sweeper`)**
+3. **Automated Liquidity Sweeper & Yield Vault (`yield_sweeper`)**
    - **Zero-Idle Cash Compounding**: Continuous second-by-second yield compounding at 7.40% APY via Soroban share tokens.
    - **Atomic Sweep-on-Debit**: Unwinds exact required funds from the yield vault only at the exact millisecond a payment executes, eliminating manual un-staking friction.
 
-3. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
+4. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
    - **M-of-N Cryptographic Consensus**: Define multiple executive keys requiring on-chain threshold approvals before releasing capital.
    - **1-Click CSV Payroll Processor**: Drag-and-drop contractor payroll spreadsheets with automated Stellar address validation and batch total calculation.
-   - **Atomic Multi-Transfer Router**: Atomically disburses funds across all recipients in a single transaction loop with zero partial failure risk.
 
-4. **Autonomous On-Chain Payment Splitting (`router`)**
+5. **Autonomous On-Chain Payment Splitting (`router`)**
    - **Declarative Income Matrix**: When incoming paychecks or invoices arrive, the router intercepts the funds and splits them deterministically.
    - **Multi-Bucket Allocation**: Automatically partitions incoming revenue into customizable buckets: Bills, Family Remittance, and Yield Vaults.
-   - **Zero Custody**: All fund flows execute directly on-chain via user-authorized Soroban contracts.
-
-5. **Decentralized Yield Vaults (`vault`)**
-   - **Automated Yield Compounding**: Idle savings are routed to an ERC-4626 style Soroban vault for automated yield generation.
-   - **Instant Liquidity**: Users deposit and withdraw funds on demand without locking penalties.
-
-6. **Web3 Authentication & Profile Management**
-   - **Multi-Wallet Support**: Seamless connection with Freighter, xBull, and Albedo wallets via `@creit.tech/stellar-wallets-kit`.
-   - **Automatic Testnet Funding**: One-click Friendbot funding to get new users onboarded with 10,000 testnet XLM instantly.
-   - **Real-Time Horizon & Soroban Sync**: Real-time balance and position tracking fetched directly from Stellar Horizon and Soroban RPC nodes.
 
 ---
 
@@ -84,6 +77,7 @@ All contracts are written in Rust with `soroban-sdk = "=22.0.0"`, compiled to `w
 
 | Contract | Address | Explorer |
 |----------|---------|---------|
+| **Invoice Factoring Pool** | `CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW) |
 | **Cross-Currency Invoice Router** | `CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B) |
 | **Liquidity Sweeper Vault** | `CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64) |
 | **Corporate Treasury Vault** | `CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53) |
@@ -120,6 +114,7 @@ DeliteX/
 │       │   │   ├── dashboard/          # Dashboard View Modules
 │       │   │   │   ├── DashboardShell.tsx   # Glassmorphic Layout & Wallet Bar
 │       │   │   │   ├── OverviewView.tsx     # Account Overview & Bucket Cards
+│       │   │   │   ├── FactoringView.tsx    # Working Capital & Instant Factoring UI
 │       │   │   │   ├── TreasuryView.tsx     # Multi-Sig Treasury & Batch Payroll UI
 │       │   │   │   ├── InvoicingView.tsx    # Cross-Currency Smart Invoicing UI
 │       │   │   │   ├── SavingsView.tsx      # Automated Liquidity Sweeper & Yield UI
@@ -136,6 +131,7 @@ DeliteX/
 │       │   │
 │       │   └── lib/                    # Web3, Stellar SDK & Data Utilities
 │       │       ├── stellar/            # Stellar & Soroban Client Libraries
+│       │       │   ├── factoring.ts    # 80% LTV advance & fee calculations
 │       │       │   ├── invoicing.ts    # Cross-currency path payment calculations
 │       │       │   ├── sweeper.ts      # Liquidity sweeper compounding calculations
 │       │       │   ├── treasury.ts     # Batch CSV parser & Multisig helpers
@@ -148,6 +144,8 @@ DeliteX/
 │       └── package.json                # Web App Dependencies (Next 16, Stellar SDK)
 │
 ├── contracts/                          # Soroban Smart Contracts (Rust Workspace)
+│   ├── invoice_factoring/              # Working Capital & Instant Invoice Factoring
+│   │   └── src/lib.rs                  # 80% LTV advance & self-repaying settlement
 │   ├── invoice_router/                 # Cross-Currency Smart Invoicing Contract
 │   │   └── src/lib.rs                  # Invoice registry & deterministic settlement
 │   ├── yield_sweeper/                  # Automated Liquidity Sweeper & Yield Engine
@@ -159,6 +157,7 @@ DeliteX/
 │   ├── vault/                          # Yield-Generation Vault Contract
 │   │   └── src/lib.rs                  # ERC-4626 style deposit, withdraw & balances
 │   ├── scripts/                        # Deployment & Initialization Scripts
+│   │   ├── deploy-factoring.js         # Deploys Factoring contract to Testnet
 │   │   ├── deploy-invoice.js           # Deploys Invoice Router contract to Testnet
 │   │   ├── deploy-sweeper.js           # Deploys Yield Sweeper contract to Testnet
 │   │   ├── deploy-treasury.js          # Deploys Treasury contract to Testnet
@@ -190,6 +189,7 @@ DeliteX/
 
 | Variable                       | Required | Default | Description                                                |
 | ------------------------------ | -------- | ------- | ---------------------------------------------------------- |
+| `NEXT_PUBLIC_SOROBAN_FACTORING`| Yes      | `""`    | Deployed Factoring Pool contract ID on Stellar Testnet     |
 | `NEXT_PUBLIC_SOROBAN_INVOICE`  | Yes      | `""`    | Deployed Invoice Router contract ID on Stellar Testnet     |
 | `NEXT_PUBLIC_SOROBAN_SWEEPER`  | Yes      | `""`    | Deployed Sweeper Vault contract ID on Stellar Testnet      |
 | `NEXT_PUBLIC_SOROBAN_TREASURY` | Yes      | `""`    | Deployed Treasury contract ID on Stellar Testnet           |
@@ -211,56 +211,6 @@ DeliteX/
 
 ---
 
-## Screenshots
-
-### Landing Page
-![Landing Page](apps/web/public/Screenshots/Landing%20Page.png)
-> Delite's entry point — glassmorphic hero with WebGL procedural background, wallet connect, and live feature overview.
-
----
-
-### Dashboard Overview
-![Dashboard](apps/web/public/Screenshots/Dashbaord.png)
-> Financial OS overview tracking available reserves, smart buckets (Bills, Remittance, Savings), and recent transactions.
-
----
-
-### AI Allocation Rule Editor
-![Agentic AI](apps/web/public/Screenshots/Agentic%20Ai.png)
-> Interactive rule configurator for converting plain-text financial goals into on-chain Soroban routing matrices.
-
----
-
-### Family & Remittance Management
-![Family & Remittance](apps/web/public/Screenshots/Family%20&%20Remitance.png)
-> Manage global beneficiaries and verify automated cross-border settlements in real time.
-
----
-
-### Deployed Vault Contract
-![Deployed Vault Contract](apps/web/public/Screenshots/Deployed%20Vault%20Contract.png)
-> Verified yield vault contract on Stellar Testnet showing on-chain storage and WASM execution metrics.
-
----
-
-### Vault Deposit Transaction
-![Vault Transaction](apps/web/public/Screenshots/Vault%20Transaction.png)
-> On-chain confirmation of automated fund routing into the Soroban Yield Vault.
-
----
-
-### Real-World Transaction Proof
-![Transaction Proof](apps/web/public/Screenshots/Transaction%20Proof.png)
-> Real-time ledger confirmation of payment interception and automated splitting.
-
----
-
-### CI/CD Pipeline
-![CI CD Pipeline](apps/web/public/Screenshots/CI%20CD%20Pipeline.png)
-> Turborepo automated build and type-checking pipelines ensuring zero regression.
-
----
-
 ## System Architecture
 
 ```text
@@ -268,11 +218,11 @@ DeliteX/
 │                       USER / ENTERPRISE ADMIN                       │
 └─────────────────────────────────────────────────────────────────────┘
         │                                             │
-        │ Declarative Intent / Invoices / Payroll     │ M-of-N Signature
+        │ Factoring Advances / Invoices / Payroll     │ M-of-N Signature
         ▼                                             ▼
 ┌──────────────────────────────────────────────────────────────────────┐
 │                    Delite Next.js Frontend OS                        │
-│         /app  ·  /invoices  ·  /treasury  ·  /savings                │
+│    /app · /factoring · /invoices · /treasury · /savings              │
 └──────────────────────────────┬───────────────────────────────────────┘
                                │
               ┌────────────────┴─────────────────┐
@@ -290,13 +240,13 @@ DeliteX/
  │                  Stellar Horizon & Soroban RPC                     │
  └────────────────────────────┬───────────────────────────────────────┘
                               │
-     ┌────────────────────────┼────────────────────────┬────────────────────────┬────────────────────────┐
-     ▼                        ▼                        ▼                        ▼                        ▼
-┌───────────────┐     ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
-│Invoice Router │     │ Yield Sweeper │        │Treasury Vault │        │Payment Router │        │  Yield Vault  │
-│(Cross-Currency│     │ (Zero-Idle    │        │(M-of-N Multi  │        │(Autonomous    │        │  (ERC-4626    │
-│ Path Payments)│     │  Auto-Yield)  │        │ Batch Payroll)│        │ Fund Splits)  │        │   Compounding)│
-└───────────────┘     └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘
+     ┌────────────────────────┼────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┐
+     ▼                        ▼                        ▼                        ▼                        ▼                        ▼
+┌───────────────┐     ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
+│Factoring Pool │     │Invoice Router │        │ Yield Sweeper │        │Treasury Vault │        │Payment Router │        │  Yield Vault  │
+│(80% Working   │     │(Cross-Currency│        │ (Zero-Idle    │        │(M-of-N Multi  │        │(Autonomous    │        │  (ERC-4626    │
+│Capital Advance│     │ Path Payments)│        │  Auto-Yield)  │        │ Batch Payroll)│        │ Fund Splits)  │        │   Compounding)│
+└───────────────┘     └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘
 ```
 
 ---
@@ -334,7 +284,7 @@ pnpm run dev
 cargo build --manifest-path contracts/Cargo.toml --target wasm32-unknown-unknown --release
 
 # Build specific contract using Stellar CLI
-stellar contract build --manifest-path contracts/invoice_router/Cargo.toml
+stellar contract build --manifest-path contracts/invoice_factoring/Cargo.toml
 
 # Run smart contract unit tests
 cargo test --manifest-path contracts/Cargo.toml
@@ -345,8 +295,8 @@ cargo test --manifest-path contracts/Cargo.toml
 ## Security & Non-Custodial Architecture
 
 - **Client-Side Key Management**: Delite never stores or transmits private keys. All cryptographic signing happens locally inside the user's browser extension via `@creit.tech/stellar-wallets-kit`.
-- **Soroban `require_auth`**: Every state-changing function across Invoices, Sweeper, Treasury, Router, and Vault enforces cryptographic caller authentication.
-- **Zero-Spread DEX Routing**: Cross-currency invoicing executes directly via Stellar L1 orderbooks, preventing middleman FX gouging.
+- **Soroban `require_auth`**: Every state-changing function across Factoring, Invoices, Sweeper, Treasury, Router, and Vault enforces cryptographic caller authentication.
+- **80% LTV Underwriting Guarantees**: Factoring advances are strictly bound to 80% of verified invoices with automated escrow self-repayment.
 - **Zero-Idle Capital Efficiency**: 100% of liquid assets remain compounding inside the Soroban Vault and are unwound atomically at the millisecond of payment execution.
 - **M-of-N Multisig Guarantees**: Corporate disbursements cannot execute without satisfying the on-chain threshold of authorized owner signatures.
 - **Atomic Rollbacks**: Operations revert completely if any single recipient transfer encounters an error, preventing partial disbursements or trapped capital.

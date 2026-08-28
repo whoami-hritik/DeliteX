@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Building2,
   ReceiptText,
+  Banknote,
   Wallet,
   Receipt,
   Users,
@@ -20,7 +21,7 @@ import {
   LogOut,
 } from "lucide-react";
 
-type Section = "overview" | "treasury" | "invoicing" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
+type Section = "overview" | "treasury" | "invoicing" | "factoring" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
   {
@@ -37,6 +38,11 @@ const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
     id: "invoicing",
     label: "Invoices",
     icon: <ReceiptText size={18} />,
+  },
+  {
+    id: "factoring",
+    label: "Working Capital",
+    icon: <Banknote size={18} />,
   },
   {
     id: "income",
