@@ -198,7 +198,7 @@ export default function InvoicingView() {
 
   const contractAddress =
     process.env.NEXT_PUBLIC_SOROBAN_INVOICE ||
-    "CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B";
+    "CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>

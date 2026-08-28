@@ -150,7 +150,7 @@ export default function FactoringView() {
 
   const contractAddress =
     process.env.NEXT_PUBLIC_SOROBAN_FACTORING ||
-    "CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW";
+    "CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>

@@ -149,7 +149,7 @@ export default function TaxView() {
 
   const contractAddress =
     process.env.NEXT_PUBLIC_SOROBAN_TAX ||
-    "CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV";
+    "CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>

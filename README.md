@@ -9,10 +9,10 @@ Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Curr
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Delite%20App-6366f1?style=flat-square)](https://delite-x-web.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-0ea5e9?style=flat-square)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Contracts-Soroban%20v22-8b5cf6?style=flat-square)](https://soroban.stellar.org)
-[![Tax Escrow](https://img.shields.io/badge/Tax%20Escrow-Yield%20Compounding-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV)
-[![Off-Ramp](https://img.shields.io/badge/Off--Ramp-Direct%20Bank%20Settlement-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7)
-[![Factoring](https://img.shields.io/badge/Factoring-Working%20Capital%20Advance-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
-[![Invoicing](https://img.shields.io/badge/Invoicing-Path%20Payment-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
+[![Tax Escrow](https://img.shields.io/badge/Tax%20Escrow-Yield%20Compounding-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4)
+[![Off-Ramp](https://img.shields.io/badge/Off--Ramp-Direct%20Bank%20Settlement-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2)
+[![Factoring](https://img.shields.io/badge/Factoring-Working%20Capital%20Advance-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA)
+[![Invoicing](https://img.shields.io/badge/Invoicing-Path%20Payment-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I)
 [![Treasury](https://img.shields.io/badge/Treasury-M--of--N%20Multisig-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
 [![Sweeper](https://img.shields.io/badge/Sweeper-Zero--Idle%20Vault-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2016-black?style=flat-square)](https://nextjs.org)
@@ -29,19 +29,19 @@ We have deployed an on-chain tax compliance and yield vault on Soroban:
 - **Autonomous Inflow Slicing:** Automatically slices configured tax brackets (e.g. 25% US Federal/State, 20% + 10% India TDS/GST, 20% UK HMRC) whenever payments hit the DeliteX router.
 - **Yield Compounding on Tax Capital (7.40% APY):** Instead of sitting dead, withheld tax reserves compound continuously inside Soroban yield vaults until quarterly filing deadlines, earning users risk-free passive profit.
 - **1-Click On-Chain Filing & Cryptographic Proofs:** Directly settle quarterly tax liabilities to certified tax authority addresses and export verifiable cryptographic compliance certificates.
-- **Live Testnet Contract:** [`CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV`](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV)
+- **Live Testnet Contract:** [`CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4`](https://stellar.expert/explorer/testnet/contract/CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4)
 
 ### 2. Automated Local Fiat Off-Ramp & Direct Bank Settlement
 - **Direct Multi-Rail Domestic Settlement:** Convert on-chain USDC directly into local fiat currency deposited to domestic bank accounts via **UPI/IMPS** (India), **SEPA Instant** (Europe), **Pix** (Brazil), or **FedNow/ACH** (US) in 35 seconds via Stellar SEP-24/38/31 anchors.
-- **Live Testnet Contract:** [`CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7`](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7)
+- **Live Testnet Contract:** [`CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2`](https://stellar.expert/explorer/testnet/contract/CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2)
 
 ### 3. Instant Invoice Factoring & Working Capital Liquidity Pool
 - **80% Instant Cash Advances:** Agencies and freelancers lock verified Net-30/60 unpaid invoices and receive 80% liquid USDC in their wallet in under 5 seconds with automated self-repayment upon client settlement.
-- **Live Testnet Contract:** [`CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW`](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
+- **Live Testnet Contract:** [`CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA`](https://stellar.expert/explorer/testnet/contract/CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA)
 
 ### 4. Atomic Cross-Currency Invoicing & Path Payment Checkout
 - **Instant Cross-Asset Settlement:** Invoices denominated in USDC can be settled by global payers using EURC, XLM, or USDC via automated DEX path routing with zero hidden FX spreads.
-- **Live Testnet Contract:** [`CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B`](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
+- **Live Testnet Contract:** [`CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I`](https://stellar.expert/explorer/testnet/contract/CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I)
 
 ### 5. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
 - **Zero-Idle Compounding:** Idle funds earn automated compound yield (7.40% APY) inside a $c$-token share vault with atomic `sweep_and_pay()` execution for bills and remittances.
@@ -86,10 +86,10 @@ All contracts are written in Rust with `soroban-sdk = "=22.0.0"`, compiled to `w
 
 | Contract | Address | Explorer |
 |----------|---------|---------|
-| **Tax Escrow Vault** | `CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV) |
-| **Fiat Ramp Router** | `CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7) |
-| **Invoice Factoring Pool** | `CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW) |
-| **Cross-Currency Invoice Router** | `CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B) |
+| **Tax Escrow Vault** | `CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4) |
+| **Fiat Ramp Router** | `CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2) |
+| **Invoice Factoring Pool** | `CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA) |
+| **Cross-Currency Invoice Router** | `CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I) |
 | **Liquidity Sweeper Vault** | `CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64) |
 | **Corporate Treasury Vault** | `CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53) |
 | **Payment Router** | `CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CBJQ5ABTAU37OHQGD4HHLNYECUTVPJXS4BUFNWBLM7IVHBH6EIQMSJJ2) |
