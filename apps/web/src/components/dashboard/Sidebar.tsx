@@ -10,6 +10,7 @@ import {
   Building2,
   ReceiptText,
   Banknote,
+  Landmark,
   Wallet,
   Receipt,
   Users,
@@ -21,7 +22,7 @@ import {
   LogOut,
 } from "lucide-react";
 
-type Section = "overview" | "treasury" | "invoicing" | "factoring" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
+type Section = "overview" | "treasury" | "invoicing" | "factoring" | "offramp" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
   {
@@ -43,6 +44,11 @@ const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
     id: "factoring",
     label: "Working Capital",
     icon: <Banknote size={18} />,
+  },
+  {
+    id: "offramp",
+    label: "Bank Off-Ramp",
+    icon: <Landmark size={18} />,
   },
   {
     id: "income",

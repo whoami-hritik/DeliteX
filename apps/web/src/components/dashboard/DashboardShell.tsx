@@ -6,6 +6,7 @@ import OverviewView from "@/components/dashboard/OverviewView";
 import TreasuryView from "@/components/dashboard/TreasuryView";
 import InvoicingView from "@/components/dashboard/InvoicingView";
 import FactoringView from "@/components/dashboard/FactoringView";
+import OffRampView from "@/components/dashboard/OffRampView";
 import IncomeView from "@/components/dashboard/IncomeView";
 import BillsView from "@/components/dashboard/BillsView";
 import FamilyView from "@/components/dashboard/FamilyView";
@@ -33,6 +34,7 @@ const SECTION_TITLES: Record<Section, string> = {
   treasury: "Corporate Treasury",
   invoicing: "Smart Invoicing & Checkout",
   factoring: "Working Capital & Instant Factoring",
+  offramp: "Automated Fiat Off-Ramp & Bank Settlement",
   income: "Income",
   bills: "Bills",
   family: "Family",
@@ -344,6 +346,8 @@ function DashboardContent({ userEmail }: { userEmail: string }) {
         return <InvoicingView />;
       case "factoring":
         return <FactoringView />;
+      case "offramp":
+        return <OffRampView />;
       case "income":
         return <IncomeView />;
       case "bills":
