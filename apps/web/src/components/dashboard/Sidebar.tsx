@@ -8,6 +8,7 @@ import Image from "next/image";
 import {
   LayoutDashboard,
   Building2,
+  ReceiptText,
   Wallet,
   Receipt,
   Users,
@@ -19,7 +20,7 @@ import {
   LogOut,
 } from "lucide-react";
 
-type Section = "overview" | "treasury" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
+type Section = "overview" | "treasury" | "invoicing" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
   {
@@ -31,6 +32,11 @@ const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
     id: "treasury",
     label: "Treasury",
     icon: <Building2 size={18} />,
+  },
+  {
+    id: "invoicing",
+    label: "Invoices",
+    icon: <ReceiptText size={18} />,
   },
   {
     id: "income",

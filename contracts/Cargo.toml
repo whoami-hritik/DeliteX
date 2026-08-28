@@ -3,7 +3,8 @@ members = [
     "vault",
     "router",
     "treasury",
-    "yield_sweeper"
+    "yield_sweeper",
+    "invoice_router"
 ]
 resolver = "2"
 
