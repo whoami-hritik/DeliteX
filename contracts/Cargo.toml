@@ -6,7 +6,8 @@ members = [
     "yield_sweeper",
     "invoice_router",
     "invoice_factoring",
-    "ramp_settlement"
+    "ramp_settlement",
+    "tax_escrow"
 ]
 resolver = "2"
 

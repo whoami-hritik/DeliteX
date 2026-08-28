@@ -186,7 +186,7 @@ export default function OffRampView() {
 
   const contractAddress =
     process.env.NEXT_PUBLIC_SOROBAN_RAMP ||
-    "CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP";
+    "CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7";
 
   const totalOffRamped = history.reduce((s, h) => s + h.amountUsdc, 0);
 

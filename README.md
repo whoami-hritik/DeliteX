@@ -2,14 +2,15 @@
 
 # Delite
 
-### Agentic Remittance, Multi-Sig Treasury & Instant Fiat Off-Ramp on Stellar Soroban
+### Agentic Remittance, Multi-Sig Treasury, Factoring & Tax Escrow on Stellar Soroban
 
-Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Currency Invoicing · Instant Factoring · Direct Bank Off-Ramp · Built on Stellar Testnet
+Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Currency Invoicing · Instant Factoring · Direct Bank Off-Ramp · Tax Escrow · Built on Stellar Testnet
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Delite%20App-6366f1?style=flat-square)](https://delite-x-web.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-0ea5e9?style=flat-square)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Contracts-Soroban%20v22-8b5cf6?style=flat-square)](https://soroban.stellar.org)
-[![Off-Ramp](https://img.shields.io/badge/Off--Ramp-Direct%20Bank%20Settlement-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP)
+[![Tax Escrow](https://img.shields.io/badge/Tax%20Escrow-Yield%20Compounding-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV)
+[![Off-Ramp](https://img.shields.io/badge/Off--Ramp-Direct%20Bank%20Settlement-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7)
 [![Factoring](https://img.shields.io/badge/Factoring-Working%20Capital%20Advance-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
 [![Invoicing](https://img.shields.io/badge/Invoicing-Path%20Payment-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
 [![Treasury](https://img.shields.io/badge/Treasury-M--of--N%20Multisig-22c55e?style=flat-square)](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
@@ -23,27 +24,30 @@ Automate Global Payroll · Multi-Sig Treasury · Zero-Idle Sweeper · Cross-Curr
 
 ## What's New
 
-### 1. Automated Local Fiat Off-Ramp & Direct Bank Settlement
-We have deployed an on-chain domestic bank off-ramp gateway on Soroban:
-- **Direct Multi-Rail Domestic Settlement:** Convert on-chain USDC directly into local fiat currency deposited to your domestic bank account via **UPI/IMPS** (India), **SEPA Instant** (Europe), **Pix** (Brazil), or **FedNow/ACH** (US) in 35 seconds.
-- **Stellar Anchor Integration (SEP-24 / SEP-38 / SEP-31):** Direct connection to licensed banking anchors with zero middleman FX gouging and zero P2P scam or bank-freezing risk.
-- **Autonomous "Ramp on Inflow" Rule:** Configure automatic percentage-based off-ramping (e.g., 40% of incoming salary auto-deposited to your UPI account, 60% compounding in yield vaults).
-- **Live Testnet Contract:** [`CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP`](https://stellar.expert/explorer/testnet/contract/CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP)
+### 1. Automated On-Chain Tax Withholding & Yield-Earning Tax Escrow
+We have deployed an on-chain tax compliance and yield vault on Soroban:
+- **Autonomous Inflow Slicing:** Automatically slices configured tax brackets (e.g. 25% US Federal/State, 20% + 10% India TDS/GST, 20% UK HMRC) whenever payments hit the DeliteX router.
+- **Yield Compounding on Tax Capital (7.40% APY):** Instead of sitting dead, withheld tax reserves compound continuously inside Soroban yield vaults until quarterly filing deadlines, earning users risk-free passive profit.
+- **1-Click On-Chain Filing & Cryptographic Proofs:** Directly settle quarterly tax liabilities to certified tax authority addresses and export verifiable cryptographic compliance certificates.
+- **Live Testnet Contract:** [`CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV`](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV)
 
-### 2. Instant Invoice Factoring & Working Capital Liquidity Pool
-- **80% Instant Cash Advances:** Agencies and freelancers lock verified Net-30/60 unpaid invoices and receive 80% liquid USDC in their wallet in under 5 seconds.
-- **Automated Self-Repaying Settlement:** When the debtor settles the invoice via `InvoiceRouter`, the smart contract intercepts the payment, repays the pool principal + 1.5% discount fee, and forwards the 20% remainder to the merchant.
+### 2. Automated Local Fiat Off-Ramp & Direct Bank Settlement
+- **Direct Multi-Rail Domestic Settlement:** Convert on-chain USDC directly into local fiat currency deposited to domestic bank accounts via **UPI/IMPS** (India), **SEPA Instant** (Europe), **Pix** (Brazil), or **FedNow/ACH** (US) in 35 seconds via Stellar SEP-24/38/31 anchors.
+- **Live Testnet Contract:** [`CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7`](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7)
+
+### 3. Instant Invoice Factoring & Working Capital Liquidity Pool
+- **80% Instant Cash Advances:** Agencies and freelancers lock verified Net-30/60 unpaid invoices and receive 80% liquid USDC in their wallet in under 5 seconds with automated self-repayment upon client settlement.
 - **Live Testnet Contract:** [`CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW`](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW)
 
-### 3. Atomic Cross-Currency Invoicing & Path Payment Checkout
+### 4. Atomic Cross-Currency Invoicing & Path Payment Checkout
 - **Instant Cross-Asset Settlement:** Invoices denominated in USDC can be settled by global payers using EURC, XLM, or USDC via automated DEX path routing with zero hidden FX spreads.
 - **Live Testnet Contract:** [`CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B`](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B)
 
-### 4. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
+### 5. Automated Liquidity Sweeper & Yield Engine (Zero-Idle Cash)
 - **Zero-Idle Compounding:** Idle funds earn automated compound yield (7.40% APY) inside a $c$-token share vault with atomic `sweep_and_pay()` execution for bills and remittances.
 - **Live Testnet Contract:** [`CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64`](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64)
 
-### 5. Corporate Multi-Sig Treasury & 1-Click Batch Payroll
+### 6. Corporate Multi-Sig Treasury & 1-Click Batch Payroll
 - **M-of-N Cryptographic Consensus:** Organizations configure $N$ executive signer keys and require $M$ approvals to disburse payroll across up to 100 contractors in a single atomic transaction block.
 - **Live Testnet Contract:** [`CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53`](https://stellar.expert/explorer/testnet/contract/CDA53YJJ6KEL24EY5KVY34ELUWG7LRCTDTDMPLZMYEU3UBXZQKV7GM53)
 
@@ -51,29 +55,28 @@ We have deployed an on-chain domestic bank off-ramp gateway on Soroban:
 
 ## Comprehensive Overview
 
-Delite is a full-stack, non-custodial financial operating system and remittance router built natively for the Stellar and Soroban ecosystem. Delite automates cross-border income flows, multi-sig corporate treasuries, instant working capital factoring, direct fiat bank off-ramps, and decentralized savings streams, replacing slow banking rails with instant, cryptographic smart contracts.
+Delite is a full-stack, non-custodial financial operating system and remittance router built natively for the Stellar and Soroban ecosystem. Delite automates cross-border income flows, multi-sig corporate treasuries, instant working capital factoring, direct fiat bank off-ramps, automated tax withholding, and decentralized savings streams, replacing slow banking rails with instant, cryptographic smart contracts.
 
 ### Core Protocol Stack & Features
 
-1. **Automated Local Fiat Off-Ramp (`ramp_settlement`)**
+1. **Automated On-Chain Tax Escrow (`tax_escrow`)**
+   - **Autonomous Tax Slicing**: Automatically separates income tax and GST/VAT from gross revenue before reaching spending wallets.
+   - **Yield-Earning Tax Reserves**: Compounds idle tax capital at 7.4% APY until quarterly payment dates.
+
+2. **Automated Local Fiat Off-Ramp (`ramp_settlement`)**
    - **Direct Domestic Bank Settlement**: Automatic conversion and deposit of on-chain USDC into domestic bank switches (UPI/IMPS for India, SEPA for Europe, Pix for Brazil, FedNow/ACH for US).
-   - **Stellar Anchor Integration**: Leverages SEP-24, SEP-38, and SEP-31 for direct, regulated fiat off-ramping.
 
-2. **Instant Invoice Factoring & Working Capital (`invoice_factoring`)**
+3. **Instant Invoice Factoring & Working Capital (`invoice_factoring`)**
    - **80% LTV Instant Cash Advances**: Receive instant working capital on Net-30 invoices without traditional bank credit checks or personal guarantees.
-   - **Self-Repaying On-Chain Escrow**: Automatically repays advances and remits residual funds on client settlement.
 
-3. **Atomic Cross-Currency Invoicing (`invoice_router`)**
+4. **Atomic Cross-Currency Invoicing (`invoice_router`)**
    - **Multi-Asset DEX Path Routing**: Clients in Europe or across the globe pay invoices in EURC or XLM; merchants receive exact USDC settlement directly on-chain.
-   - **Verifiable Receipt Registry**: On-chain invoice lifecycle management with automated receipt generation and transaction hashes.
 
-4. **Automated Liquidity Sweeper & Yield Vault (`yield_sweeper`)**
+5. **Automated Liquidity Sweeper & Yield Vault (`yield_sweeper`)**
    - **Zero-Idle Cash Compounding**: Continuous second-by-second yield compounding at 7.40% APY via Soroban share tokens.
-   - **Atomic Sweep-on-Debit**: Unwinds exact required funds from the yield vault only at the exact millisecond a payment executes.
 
-5. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
+6. **Corporate Multi-Sig Treasury & Batch Payroll (`treasury`)**
    - **M-of-N Cryptographic Consensus**: Define multiple executive keys requiring on-chain threshold approvals before releasing capital.
-   - **1-Click CSV Payroll Processor**: Drag-and-drop contractor payroll spreadsheets with automated Stellar address validation and batch total calculation.
 
 ---
 
@@ -83,7 +86,8 @@ All contracts are written in Rust with `soroban-sdk = "=22.0.0"`, compiled to `w
 
 | Contract | Address | Explorer |
 |----------|---------|---------|
-| **Fiat Ramp Router** | `CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CCTTCPSCGUIPJULJIGZQLCWDJHVUR6X4LY5QBLLBGAMN55CBWBMTPUVP) |
+| **Tax Escrow Vault** | `CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAVR6ODONMVSBKAWV2V5C7LRBYYKOHM2HX5ADDBRF6AFJ65KILZM2XVV) |
+| **Fiat Ramp Router** | `CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDBRJZWMNN534PAEBOX6D5LNXVABLNFYFFVK2VIQHQ5U2KUWVPPFKVX7) |
 | **Invoice Factoring Pool** | `CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAEOVGNP6CDDJHZDXHWTZFTOP2MEPXZZDHTQNSAVJGE6GIO6QUKP6INW) |
 | **Cross-Currency Invoice Router** | `CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAJVSV3RWS76EFMGLSJOL2UV5SLPI55R5BLNTR4OQSEZMTGLA44SWC2B) |
 | **Liquidity Sweeper Vault** | `CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDNBSZFM6XFAW7T2JKAWX4MDCIMAHUPT4TH2QNBFOCGRTRQWEGHUBD64) |
@@ -121,6 +125,7 @@ DeliteX/
 │       │   │   ├── dashboard/          # Dashboard View Modules
 │       │   │   │   ├── DashboardShell.tsx   # Glassmorphic Layout & Wallet Bar
 │       │   │   │   ├── OverviewView.tsx     # Account Overview & Bucket Cards
+│       │   │   │   ├── TaxView.tsx          # Automated On-Chain Tax Escrow UI
 │       │   │   │   ├── OffRampView.tsx      # Automated Fiat Off-Ramp & Bank UI
 │       │   │   │   ├── FactoringView.tsx    # Working Capital & Instant Factoring UI
 │       │   │   │   ├── TreasuryView.tsx     # Multi-Sig Treasury & Batch Payroll UI
@@ -139,6 +144,7 @@ DeliteX/
 │       │   │
 │       │   └── lib/                    # Web3, Stellar SDK & Data Utilities
 │       │       ├── stellar/            # Stellar & Soroban Client Libraries
+│       │       │   ├── tax.ts          # Jurisdiction rules & tax slicing calculations
 │       │       │   ├── offramp.ts      # Multi-rail bank calculations (UPI/SEPA/Pix)
 │       │       │   ├── factoring.ts    # 80% LTV advance & fee calculations
 │       │       │   ├── invoicing.ts    # Cross-currency path payment calculations
@@ -153,6 +159,8 @@ DeliteX/
 │       └── package.json                # Web App Dependencies (Next 16, Stellar SDK)
 │
 ├── contracts/                          # Soroban Smart Contracts (Rust Workspace)
+│   ├── tax_escrow/                     # Automated On-Chain Tax Withholding Vault
+│   │   └── src/lib.rs                  # Tax profile, autonomous slicing & disbursements
 │   ├── ramp_settlement/                # Automated Fiat Off-Ramp & Bank Router
 │   │   └── src/lib.rs                  # Bank beneficiary registry & auto-ramp slicing
 │   ├── invoice_factoring/              # Working Capital & Instant Invoice Factoring
@@ -168,6 +176,7 @@ DeliteX/
 │   ├── vault/                          # Yield-Generation Vault Contract
 │   │   └── src/lib.rs                  # ERC-4626 style deposit, withdraw & balances
 │   ├── scripts/                        # Deployment & Initialization Scripts
+│   │   ├── deploy-tax.js               # Deploys Tax Escrow Vault to Testnet
 │   │   ├── deploy-ramp.js              # Deploys Fiat Ramp Router to Testnet
 │   │   ├── deploy-factoring.js         # Deploys Factoring contract to Testnet
 │   │   ├── deploy-invoice.js           # Deploys Invoice Router contract to Testnet
@@ -201,6 +210,7 @@ DeliteX/
 
 | Variable                       | Required | Default | Description                                                |
 | ------------------------------ | -------- | ------- | ---------------------------------------------------------- |
+| `NEXT_PUBLIC_SOROBAN_TAX`      | Yes      | `""`    | Deployed Tax Escrow Vault contract ID on Stellar Testnet   |
 | `NEXT_PUBLIC_SOROBAN_RAMP`     | Yes      | `""`    | Deployed Fiat Ramp Router contract ID on Stellar Testnet   |
 | `NEXT_PUBLIC_SOROBAN_FACTORING`| Yes      | `""`    | Deployed Factoring Pool contract ID on Stellar Testnet     |
 | `NEXT_PUBLIC_SOROBAN_INVOICE`  | Yes      | `""`    | Deployed Invoice Router contract ID on Stellar Testnet     |
@@ -231,11 +241,11 @@ DeliteX/
 │                       USER / ENTERPRISE ADMIN                       │
 └─────────────────────────────────────────────────────────────────────┘
         │                                             │
-        │ Factoring / Off-Ramp / Invoices / Payroll   │ M-of-N Signature
+        │ Tax / Off-Ramp / Factoring / Invoicing      │ M-of-N Signature
         ▼                                             ▼
 ┌──────────────────────────────────────────────────────────────────────┐
 │                    Delite Next.js Frontend OS                        │
-│ /app · /offramp · /factoring · /invoices · /treasury · /savings      │
+│   /app · /tax · /offramp · /factoring · /invoices · /treasury        │
 └──────────────────────────────┬───────────────────────────────────────┘
                                │
               ┌────────────────┴─────────────────┐
@@ -253,13 +263,13 @@ DeliteX/
  │                  Stellar Horizon & Soroban RPC                     │
  └────────────────────────────┬───────────────────────────────────────┘
                               │
-     ┌────────────────────────┼────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┐
-     ▼                        ▼                        ▼                        ▼                        ▼                        ▼                        ▼
-┌───────────────┐     ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
-│Fiat Ramp      │     │Factoring Pool │        │Invoice Router │        │ Yield Sweeper │        │Treasury Vault │        │Payment Router │        │  Yield Vault  │
-│(Direct Bank / │     │(80% Working   │        │(Cross-Currency│        │ (Zero-Idle    │        │(M-of-N Multi  │        │(Autonomous    │        │  (ERC-4626    │
-│ UPI Auto-Ramp)│     │Capital Advance│        │ Path Payments)│        │  Auto-Yield)  │        │ Batch Payroll)│        │ Fund Splits)  │        │   Compounding)│
-└───────────────┘     └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘
+     ┌────────────────────────┼────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┐
+     ▼                        ▼                        ▼                        ▼                        ▼                        ▼                        ▼                        ▼
+┌───────────────┐     ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐        ┌───────────────┐
+│Tax Escrow     │     │Fiat Ramp      │        │Factoring Pool │        │Invoice Router │        │ Yield Sweeper │        │Treasury Vault │        │Payment Router │        │  Yield Vault  │
+│(Auto-Withhold │     │(Direct Bank / │        │(80% Working   │        │(Cross-Currency│        │ (Zero-Idle    │        │(M-of-N Multi  │        │(Autonomous    │        │  (ERC-4626    │
+│ & 7.4% Yield) │     │ UPI Auto-Ramp)│        │Capital Advance│        │ Path Payments)│        │  Auto-Yield)  │        │ Batch Payroll)│        │ Fund Splits)  │        │   Compounding)│
+└───────────────┘     └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘        └───────────────┘
 ```
 
 ---
@@ -297,7 +307,7 @@ pnpm run dev
 cargo build --manifest-path contracts/Cargo.toml --target wasm32-unknown-unknown --release
 
 # Build specific contract using Stellar CLI
-stellar contract build --manifest-path contracts/ramp_settlement/Cargo.toml
+stellar contract build --manifest-path contracts/tax_escrow/Cargo.toml
 
 # Run smart contract unit tests
 cargo test --manifest-path contracts/Cargo.toml
@@ -308,8 +318,8 @@ cargo test --manifest-path contracts/Cargo.toml
 ## Security & Non-Custodial Architecture
 
 - **Client-Side Key Management**: Delite never stores or transmits private keys. All cryptographic signing happens locally inside the user's browser extension via `@creit.tech/stellar-wallets-kit`.
-- **Soroban `require_auth`**: Every state-changing function across Off-Ramp, Factoring, Invoices, Sweeper, Treasury, Router, and Vault enforces cryptographic caller authentication.
-- **Direct Regulated Settlement**: Local bank deposits route through licensed financial institutions and regulated Stellar anchors, eliminating P2P counterparty fraud.
+- **Soroban `require_auth`**: Every state-changing function across Tax Escrow, Off-Ramp, Factoring, Invoices, Sweeper, Treasury, Router, and Vault enforces cryptographic caller authentication.
+- **Yield-Compounded Tax Reserves**: Tax capital remains non-custodial and earns yield until authorized for disbursement to certified tax authority addresses.
 - **Zero-Idle Capital Efficiency**: 100% of liquid assets remain compounding inside the Soroban Vault and are unwound atomically at the millisecond of payment execution.
 - **M-of-N Multisig Guarantees**: Corporate disbursements cannot execute without satisfying the on-chain threshold of authorized owner signatures.
 

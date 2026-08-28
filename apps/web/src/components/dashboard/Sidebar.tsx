@@ -11,6 +11,7 @@ import {
   ReceiptText,
   Banknote,
   Landmark,
+  Scale,
   Wallet,
   Receipt,
   Users,
@@ -22,7 +23,7 @@ import {
   LogOut,
 } from "lucide-react";
 
-type Section = "overview" | "treasury" | "invoicing" | "factoring" | "offramp" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
+type Section = "overview" | "treasury" | "invoicing" | "factoring" | "offramp" | "tax" | "income" | "bills" | "family" | "savings" | "rules" | "agent" | "stellar" | "profile";
 
 const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
   {
@@ -49,6 +50,11 @@ const navItems: { id: Section; label: string; icon: React.ReactNode }[] = [
     id: "offramp",
     label: "Bank Off-Ramp",
     icon: <Landmark size={18} />,
+  },
+  {
+    id: "tax",
+    label: "Tax Escrow",
+    icon: <Scale size={18} />,
   },
   {
     id: "income",
