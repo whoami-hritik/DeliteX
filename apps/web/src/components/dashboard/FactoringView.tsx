@@ -74,7 +74,7 @@ export default function FactoringView() {
   const advanceMath = calculateAdvance(parseFloat(reqAmount) || 0);
 
   // Submit Advance Request
-  const handleRequestAdvance = () => {
+  const handleRequestAdvance = async () => {
     const amt = parseFloat(reqAmount);
     if (isNaN(amt) || amt <= 0) {
       toast.error("Enter a valid invoice amount.");
@@ -86,10 +86,31 @@ export default function FactoringView() {
     }
 
     setIsProcessing(true);
-    setTimeout(() => {
+    try {
+      const { invokeSorobanMethod } = await import("@/lib/stellar/soroban");
+      const { Address, nativeToScVal } = await import("@stellar/stellar-sdk");
+      const { requestAccess } = await import("@stellar/freighter-api");
+
+      const access = await requestAccess();
+      const pubKey = typeof access === 'string' ? access : access.address;
+      const invoiceId = 100 + positions.length + 1;
+      
+      const args = [
+        new Address(pubKey).toScVal(),
+        nativeToScVal(invoiceId, { type: "u64" }),
+        nativeToScVal(Math.floor(amt * 10000000), { type: "i128" }),
+        nativeToScVal(Math.floor(advanceMath.advanceAmount * 10000000), { type: "i128" })
+      ];
+
+      await invokeSorobanMethod(
+        process.env.NEXT_PUBLIC_SOROBAN_FACTORING_ID || "CAPNWFV3JFNE2FCGH6IWXVH5DAZQYYWFKWNLE2HRIITDZSNINH7FO2WA",
+        "advance_invoice",
+        args
+      );
+
       const newPos: FactoringPositionRecord = {
         id: positions.length + 1,
-        invoiceId: 100 + positions.length + 1,
+        invoiceId,
         invoiceNumber: reqInvoiceNum,
         clientName: reqClientName,
         totalAmountUsdc: amt,
@@ -104,9 +125,13 @@ export default function FactoringView() {
       setPositions([newPos, ...positions]);
       setActiveAdvancesTotal((a) => a + advanceMath.advanceAmount);
       setActiveTab("positions");
+      setReqAmount("");
+      toast.success(`🎉 Cash advance of $${advanceMath.advanceAmount} USDC successfully funded on-chain!`);
+    } catch (e: any) {
+      toast.error(`Advance Request Failed: ${e.message}`);
+    } finally {
       setIsProcessing(false);
-      toast.success(`🎉 $${advanceMath.advanceAmount.toLocaleString()} USDC advanced instantly to your wallet!`);
-    }, 800);
+    }
   };
 
   // Simulate Client Settle Factored Invoice

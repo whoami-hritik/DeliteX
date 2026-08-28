@@ -121,7 +121,7 @@ export default function InvoicingView() {
   );
 
   // Submit Invoice
-  const handleCreateInvoice = () => {
+  const handleCreateInvoice = async () => {
     if (!newClientName.trim()) {
       toast.error("Please enter a client name.");
       return;
@@ -132,14 +132,33 @@ export default function InvoicingView() {
     }
 
     setIsProcessing(true);
-    setTimeout(() => {
+    try {
+      const { invokeSorobanMethod } = await import("@/lib/stellar/soroban");
+      const { Address, nativeToScVal } = await import("@stellar/stellar-sdk");
+      const { requestAccess } = await import("@stellar/freighter-api");
+
+      const access = await requestAccess();
+      const pubKey = typeof access === 'string' ? access : access.address;
       const nextId = invoices.length + 1;
+      
+      const args = [
+        new Address(pubKey).toScVal(),
+        nativeToScVal(nextId, { type: "u64" }),
+        nativeToScVal(Math.floor(totalCalculatedInvoice * 10000000), { type: "i128" })
+      ];
+
+      const txHash = await invokeSorobanMethod(
+        process.env.NEXT_PUBLIC_SOROBAN_INVOICE_ROUTER_ID || "CDPNJLGFJTBVYXUMHYQPOCEFIGA27UKNCAT2IHWSSVJRPGGWWT4NJC2I",
+        "create_invoice",
+        args
+      );
+
       const newInvoice: InvoiceRecord = {
         id: nextId,
         invoiceNumber: `INV-2026-08${90 + nextId}`,
         clientName: newClientName.trim(),
         clientEmail: newClientEmail.trim() || "client@domain.com",
-        merchantAddress: currentAddress,
+        merchantAddress: pubKey,
         amountDueUsdc: totalCalculatedInvoice,
         status: "unpaid",
         createdAt: new Date().toISOString(),
@@ -148,13 +167,16 @@ export default function InvoicingView() {
       };
 
       setInvoices([newInvoice, ...invoices]);
+      toast.success(`🎉 Smart invoice ${newInvoice.invoiceNumber} successfully deployed on-chain!`);
+      setActiveTab("invoices");
+    } catch (e: any) {
+      toast.error(`Invoice Creation Failed: ${e.message}`);
+    } finally {
+      setIsProcessing(false);
       setNewClientName("");
       setNewClientEmail("");
       setLineItems([{ description: "Service Item", quantity: 1, unitPriceUsdc: 1000 }]);
-      setActiveTab("invoices");
-      setIsProcessing(false);
-      toast.success(`Invoice ${newInvoice.invoiceNumber} created on Soroban!`);
-    }, 600);
+    }
   };
 
   // Settle Invoice via Simulated Path Payment

@@ -115,7 +115,7 @@ export default function OffRampView() {
   const quote = calculateRampQuote(parseFloat(offRampAmount) || 0, selectedBeneficiary?.railType || "UPI");
 
   // Execute Instant Off-Ramp
-  const handleExecuteOffRamp = () => {
+  const handleExecuteOffRamp = async () => {
     const amt = parseFloat(offRampAmount);
     if (isNaN(amt) || amt <= 0) {
       toast.error("Please enter a valid USDC amount.");
@@ -123,7 +123,27 @@ export default function OffRampView() {
     }
 
     setIsProcessing(true);
-    setTimeout(() => {
+    try {
+      const { invokeSorobanMethod } = await import("@/lib/stellar/soroban");
+      const { Address, nativeToScVal } = await import("@stellar/stellar-sdk");
+      const { requestAccess } = await import("@stellar/freighter-api");
+
+      const access = await requestAccess();
+      const pubKey = typeof access === 'string' ? access : access.address;
+      const beneficiaryId = selectedBeneficiary.id;
+      
+      const args = [
+        new Address(pubKey).toScVal(),
+        nativeToScVal(beneficiaryId, { type: "u64" }),
+        nativeToScVal(Math.floor(amt * 10000000), { type: "i128" })
+      ];
+
+      const txHash = await invokeSorobanMethod(
+        process.env.NEXT_PUBLIC_SOROBAN_RAMP_SETTLEMENT_ID || "CAN7RIIEUQQ5WUNJZ2C3AUBUCUKTYSQ4NB6ICKCBSUUECW5QBOWHD7Y2",
+        "execute_off_ramp",
+        args
+      );
+
       const newTx: OffRampTransaction = {
         id: history.length + 1,
         beneficiaryLabel: selectedBeneficiary.label,
@@ -135,15 +155,16 @@ export default function OffRampView() {
         settlementTimeSec: quote.estimatedSettlementSeconds,
         timestamp: new Date().toISOString(),
         bankRefNumber: `BANK-REF-${Math.floor(100000 + Math.random() * 900000)}`,
-        txHash: `0x${Math.random().toString(16).substring(2, 10)}${Math.random().toString(16).substring(2, 10)}`,
+        txHash: txHash,
       };
 
       setHistory([newTx, ...history]);
+      toast.success(`Fiat successfully sent to ${selectedBeneficiary.label} via on-chain settlement!`);
+    } catch (e: any) {
+      toast.error(`Off-Ramp Failed: ${e.message}`);
+    } finally {
       setIsProcessing(false);
-      toast.success(
-        `🎉 ${newTx.fiatReceived} deposited into ${selectedBeneficiary.label} in ${quote.estimatedSettlementSeconds}s!`
-      );
-    }, 900);
+    }
   };
 
   // Add Beneficiary

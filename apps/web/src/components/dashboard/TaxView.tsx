@@ -111,7 +111,7 @@ export default function TaxView() {
   };
 
   // Execute Quarterly Tax Payment
-  const handleDisburseTaxFiling = () => {
+  const handleDisburseTaxFiling = async () => {
     const amt = parseFloat(filingAmount);
     if (isNaN(amt) || amt <= 0 || amt > profile.accumulatedPrincipalUsdc) {
       toast.error("Invalid filing payment amount.");
@@ -119,7 +119,29 @@ export default function TaxView() {
     }
 
     setIsProcessing(true);
-    setTimeout(() => {
+    try {
+      // Lazy load to avoid SSR issues
+      const { invokeSorobanMethod } = await import("@/lib/stellar/soroban");
+      const { xdr, Address, nativeToScVal } = await import("@stellar/stellar-sdk");
+      const { requestAccess } = await import("@stellar/freighter-api");
+
+      const access = await requestAccess();
+      const pubKey = typeof access === 'string' ? access : access.address;
+      const authorityAddr = "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5";
+      
+      const args = [
+        new Address(pubKey).toScVal(),
+        nativeToScVal(Math.floor(amt * 10000000), { type: "i128" }),
+        nativeToScVal(filings.length + 1, { type: "u64" }),
+        new Address(authorityAddr).toScVal()
+      ];
+
+      const txHash = await invokeSorobanMethod(
+        process.env.NEXT_PUBLIC_SOROBAN_TAX_ESCROW_ID || "CDOLCWJWM3NHGWIBY7QZGECAEXJUZVCY2BIHCB4IV7R46VUUOUWYI6F4",
+        "pay_tax_filing",
+        args
+      );
+
       const newFiling: TaxFilingReceipt = {
         id: filings.length + 1,
         periodLabel: "Q3 2026 Estimated Tax",
@@ -128,7 +150,7 @@ export default function TaxView() {
         yieldHarvestedUsdc: Number((amt * 0.018).toFixed(2)),
         taxAuthorityName: selectedJurisdiction.taxAuthorityName,
         timestamp: new Date().toISOString(),
-        txHash: `0x${Math.random().toString(16).substring(2, 10)}${Math.random().toString(16).substring(2, 10)}`,
+        txHash: txHash,
         complianceCertHash: `SHA256: ${Math.random().toString(16).substring(2, 12)}${Math.random().toString(16).substring(2, 12)}`,
       };
 
@@ -137,10 +159,13 @@ export default function TaxView() {
         ...profile,
         accumulatedPrincipalUsdc: profile.accumulatedPrincipalUsdc - amt,
       });
-      setIsProcessing(false);
       setIsFilingModalOpen(false);
-      toast.success(`🎉 $${amt.toLocaleString()} USDC tax payment settled to ${selectedJurisdiction.taxAuthorityName}!`);
-    }, 800);
+      toast.success(`🎉 $${amt.toLocaleString()} USDC tax payment settled on-chain to ${selectedJurisdiction.taxAuthorityName}!`);
+    } catch (e: any) {
+      toast.error(`Transaction Failed: ${e.message}`);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleDownloadCertificate = (certHash: string) => {
